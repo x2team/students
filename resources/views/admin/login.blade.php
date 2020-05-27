@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <base href="{{ asset('public/admin') }}/">
+    <base href="{{ asset('admin') }}/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 3 | Log in</title>
@@ -29,7 +29,8 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="index3.html" method="post">
+      <form action="{{ route('login') }}" method="post">
+        @csrf
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">

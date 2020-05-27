@@ -17,19 +17,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-// Auth::routes();
+Auth::routes();
 
 
 
-Route::namespace('Admin')->group(function () {
-    // Controllers Within The "App\Http\Controllers\Admin" Namespace
-    Route::prefix('admin')->group(function () {
-        Route::get('login', 'LoginController@showLoginForm');
+// Route::namespace('Admin')->group(function () {
+//     // Controllers Within The "App\Http\Controllers\Admin" Namespace
+//     Route::prefix('admin')->group(function () {
+        
+//         Route::get('login', 'LoginController@showLoginForm')->name('login');
+//         Route::post('login', 'LoginController@login');
+//         Route::get('/home', 'LoginController@index')->name('home');
 
 
-        Route::get('/home', 'LoginController@index')->name('home');
-    });
-});
+//     });
+// });
 
 // Route::namespace('Admin')->prefix('admin')->group(function () {
 //     // Controllers Within The "App\Http\Controllers\Admin" Namespace

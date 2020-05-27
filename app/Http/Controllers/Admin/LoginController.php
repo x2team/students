@@ -71,7 +71,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin.home');
     }
 
     /**
