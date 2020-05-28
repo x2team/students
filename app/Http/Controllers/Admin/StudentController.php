@@ -42,7 +42,7 @@ class StudentController extends Controller
      */
     public function store(Admin\StudentStoreRequest $request)
     {
-        dd($request->all());
+        
         $data = $this->handleRequest($request);
 
         Student::create($data);
@@ -104,7 +104,8 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        // dd($student);
+        return view('admin.student.edit', compact('student'));
     }
 
     /**

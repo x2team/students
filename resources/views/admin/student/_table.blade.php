@@ -18,7 +18,7 @@
                         <a title="Edit Student" href="{{ route('admin.student.edit', $student->id) }}" class="btn btn-default">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <button title="Delete student, Can't delete when Movie Count > 0" onclick="return confirm('Chắc chắn chưa?');" type="submit" class="btn btn-danger">
+                        <button title="Delete student" onclick="return confirm('Chắc chắn chưa?');" type="submit" class="btn btn-danger">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>

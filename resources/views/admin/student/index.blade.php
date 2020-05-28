@@ -42,6 +42,7 @@
                         </div>
                         <div class="card-body">
                             
+                            @include('admin.shared._message')
                             @include('admin.student._table')
 
                         </div>
