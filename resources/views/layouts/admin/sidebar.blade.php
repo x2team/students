@@ -28,7 +28,7 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Starter Pages
+                            Dashboard
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -36,25 +36,10 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Active Page</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Inactive Page</p>
+                                <p>Home</p>
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
-                        </p>
-                    </a>
                 </li>
 
                 <li class="nav-item has-treeview">
@@ -67,7 +52,7 @@
                     </a>
                     <ul class="nav nav-treeview" style="display: none;">
                       <li class="nav-item">
-                        <a href="../tables/simple.html" class="nav-link">
+                        <a href="{{ route('admin.student.create') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Add New</p>
                         </a>

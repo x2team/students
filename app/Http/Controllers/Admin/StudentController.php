@@ -12,6 +12,15 @@ use App\Http\Requests\Admin;
 
 class StudentController extends Controller
 {
+    protected $uploadPath;
+
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->uploadPath = public_path(config('cms.image.directory'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -104,7 +113,6 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        // dd($student);
         return view('admin.student.edit', compact('student'));
     }
 
@@ -115,9 +123,19 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $id)
     {
-        //
+        $student     = Student::findOrFail($id);
+
+        $oldImage               = $student->image;
+        $data                   = $this->handleRequest($request);
+
+        $student->update($data);
+
+        if($oldImage !== $student->image){
+            $this->removeImage($oldImage);
+        }
+        return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
     }
 
     /**
@@ -126,8 +144,22 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Student $student)
+    public function destroy($id)
     {
-        //
+        $student = Student::findOrFail($id);
+
+        $this->removeImage($student->image);
+        
+        $student->delete();
+
+        return redirect()->route('admin.student.index')->with(['message-success' => 'Student was deleted successfully']);
+    }
+
+    private function removeImage($oldIcon)
+    {
+        if( ! empty($oldIcon)){
+            $iconFilePath = $this->uploadPath . '/' . $oldIcon;
+            if( file_exists($iconFilePath)) unlink($iconFilePath);
+        }
     }
 }

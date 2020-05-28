@@ -33,7 +33,7 @@
     </section>
 
     <!-- Main content -->
-    <form id="student-form" action="{{ route('admin.student.edit', $student->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form id="student-form" action="{{ route('admin.student.update', $student->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
     <section class="content">
         <div class="container-fluid">
             <div class="row">
