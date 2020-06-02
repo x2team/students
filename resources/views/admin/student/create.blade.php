@@ -63,7 +63,14 @@
 
 <script>
     //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+
+    $(function () {
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4',
+            });
+        });
 </script>
 
 

@@ -69,23 +69,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-    @yield('scripts')
+    
 
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
 
-    <script>
-        $(function () {
-            //Initialize Select2 Elements
-            // $('.select2').select2();
+    @yield('scripts')
 
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4',
-            });
-        });
-     </script>
 </body>
 
 </html>

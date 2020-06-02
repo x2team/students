@@ -7,11 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     protected $fillable = [
-        'name', 'gender', 'image', 'birthday'
+        'name', 'gender', 'image', 'birthday', 'point'
     ];
 
 
 
+    /**
+     * Cac Functions
+     */
+    public function dateCreated($showTimes = false)
+    {
+        $format = "d/m/Y";
+        if ($showTimes) $format = $format . " H:i:s";
+        return $this->created_at->format($format);
+    }
+    public function dateUpdated($showTimes = false)
+    {
+        $format = "d/m/Y";
+        if ($showTimes) $format = $format . " H:i:s";
+        return $this->updated_at->format($format);
+    }
 
     /**
      *  Accessor
@@ -35,5 +50,14 @@ class Student extends Model
         }
         
         return $imageUrl ?: 'https://place-hold.it/50x50?text=50x50';
+    }
+
+
+    /**
+     * Local Scopes
+     */
+    public function scopeLatestFirst($query)
+    {
+        return $query->orderBy('updated_at', 'DESC');
     }
 }

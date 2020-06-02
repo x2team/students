@@ -28,8 +28,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
-
+        $students = Student::latestFirst()->get();
+        
         return view('admin.student.index', compact('students'));
     }
 
@@ -161,5 +161,9 @@ class StudentController extends Controller
             $iconFilePath = $this->uploadPath . '/' . $oldIcon;
             if( file_exists($iconFilePath)) unlink($iconFilePath);
         }
+    }
+    public function destroyMulti($arr_id)
+    {
+        dd($arr_id);
     }
 }

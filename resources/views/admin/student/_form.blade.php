@@ -72,6 +72,15 @@
                 </div>
               </div>
 
+              <div class="form-group">
+                <label for="point">Điểm</label>
+                <input name="point" type="number" class="form-control @error('point') is-invalid @enderror" id="point"
+                    value="{{ old('point', $student->point) }}" placeholder="Nhập...">
+                @error('point')
+                    <span class="invalid-feedback">{!! $errors->first('point') !!}</span>
+                @enderror
+            </div>
+
         </div>
     </div>
 </div>
