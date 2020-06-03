@@ -11,6 +11,9 @@
     <i class="fa fa-edit"></i>
 </a>
 
+<form id="student-form" action="{{ route('admin.student.update', $student->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+    @method("PUT")
+    @csrf
 <!-- Modal -->
 <div class="modal fade" id="edit-student" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
     aria-labelledby="edit-studentLabel" aria-hidden="true">
@@ -87,8 +90,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
 </div>
+</form>

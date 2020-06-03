@@ -18,13 +18,16 @@
     <script type="text/javascript">
         //dataTables
         $("#student").DataTable({
-                "lengthMenu": [10, 25, 50, "All"],
+                "lengthMenu": [10, 25, 52, "All"],
                 // "order": [[ 6 , 'DESC']],
                 "language": {
+                    "infoEmpty": "No entries to show",
                     "paginate": {
                         "previous": "Trước",
                         "next": "Sau",
-                    }
+                        
+                    },
+                    // "infoEmpty": "Hiện đang 0 đến 0 của 0 toàn bộ.",
                 }
         });
 
