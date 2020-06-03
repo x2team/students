@@ -21,14 +21,12 @@
                 "lengthMenu": [10, 25, 52, "All"],
                 // "order": [[ 6 , 'DESC']],
                 "language": {
-                    "infoEmpty": "No entries to show",
                     "paginate": {
                         "previous": "Trước",
                         "next": "Sau",
-                        
                     },
-                    // "infoEmpty": "Hiện đang 0 đến 0 của 0 toàn bộ.",
-                }
+                },
+                select: true
         });
 
 
@@ -37,10 +35,10 @@
             var button = $(event.relatedTarget); // Button that triggered the modal
             var name = button.data('name'); // Extract info from data-* attributes
             var gender = button.data('gender');
-            var image = button.data('image');
+            var image_student = button.data('image_student');
             var birthday = button.data('birthday');
             var point = button.data('point');
-            console.log(image);
+            console.log(image_student);
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 
@@ -48,7 +46,7 @@
             // modal.find('.modal-title').text('New message to ' + name)
             modal.find('.modal-body #name').val(name);
             modal.find('.modal-body #gender').val(gender);
-            modal.find('.modal-body #image').val(image);
+            // modal.find('.modal-body #image').val(image);
             modal.find('.modal-body #birthday').val(birthday);
             modal.find('.modal-body #point').val(point);
         })

@@ -32,9 +32,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <form action="{{ route('admin.student.destroyMulti') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-        @csrf
-        @method('DELETE')
+   
 
 
     <div class="content">
@@ -62,7 +60,7 @@
             </div>
         </div>
     </div>
-    </form>
+ 
 
 
 </div>

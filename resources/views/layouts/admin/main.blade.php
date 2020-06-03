@@ -64,7 +64,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    {{-- <script src="plugins/jquery/jquery.min.js"></script> --}}
+    <script src="plugins/jquery/jquery-3.5.1.js"></script>
+    
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 

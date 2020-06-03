@@ -1,19 +1,20 @@
 
 
-
+<form id="student-form" action="{{ route('admin.student.update', $student->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+    @method("PUT")
+    @csrf
+    
 <!-- Button trigger modal -->
 <a type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#edit-student"
     data-name="{{ $student->name }}"
     data-gender="{{ $student->gender }}"
-    data-image="{{ $student->image_url }}"
+    data-image_student="{{ $student->image_url }}"
     data-birthday="{{ $student->birthday }}"
     data-point="{{ $student->point }}">
     <i class="fa fa-edit"></i>
 </a>
 
-<form id="student-form" action="{{ route('admin.student.update', $student->id)}}" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-    @method("PUT")
-    @csrf
+
 <!-- Modal -->
 <div class="modal fade" id="edit-student" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
     aria-labelledby="edit-studentLabel" aria-hidden="true">
@@ -53,10 +54,9 @@
                         <span class="help-block">{{ $errors->first('image') }}</span>
                     @enderror
                     
-                   
-                        <img width="40px" height="40px" id="image" src="{{ ($student->image_url) ?: 'https://place-hold.it/200x150?text=246x384 or 450x600&italic&bold' }}">
-                        <br><br>
-                        <input type="file" name="image">
+                    <img width="40px" height="40px" id="image" src="{{ ($student->image_url) ?: 'https://place-hold.it/200x150?text=246x384 or 450x600&italic&bold' }}">
+                    <br><br>
+                    <input id="image" type="file" name="image">
 
                 </div>
     
