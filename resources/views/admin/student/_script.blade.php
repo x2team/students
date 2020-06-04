@@ -10,9 +10,12 @@
 
     <!-- DataTables -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables/1.10.21/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-select/js/1.3.1/dataTables.select.min.js"></script>
+
+    {{-- <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> --}}
 
 
     <script type="text/javascript">
@@ -26,7 +29,16 @@
                         "next": "Sau",
                     },
                 },
-                select: true
+                // columnDefs: [ {
+                //     orderable: false,
+                //     className: 'select-checkbox',
+                //     targets:   0
+                // } ],
+                // select: {
+                //     style:    'multi',
+                //     selector: 'td:first-child'
+                // },
+
         });
 
 

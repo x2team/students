@@ -5,10 +5,10 @@
     <thead>
         <tr>
             <th>
-                <div class="icheck-success d-inline">
-                {{-- <input name="checkedAll" type="checkbox" id="checkedAll"> --}}
-                <label for="checkedAll">STT</label>
-              </div>
+                {{-- <div class="icheck-success d-inline"> --}}
+                    <input name="checkedAll" type="checkbox" id="checkedAll">
+                    {{-- <label for="checkedAll">STT</label> --}}
+                {{-- </div> --}}
             </th>
             <th width="80"> Action</th>
             <th>Student Name</th>
@@ -24,10 +24,12 @@
         @foreach($students as $key => $student)           
             <tr>
                 <td>
-                    <div class="icheck-success d-inline">
-                    <input name="ids_students[]" value="{{ $student->id }}" type="checkbox"  id="ids_students[]">
-                    <label for="ids_students[]"></label>
-                  </div>
+                    {{-- <div class="icheck-success d-inline">
+                        <input name="ids_students[]" value="{{ $student->id }}" type="checkbox"  id="ids_students[]">
+                        <label for="ids_students[]"></label>
+                    </div> --}}
+                    <input type="checkbox" value="{{ $student->id }} " name=option[]>
+                    {{-- <label for="{{$student->id}}"></label> --}}
                 </td>
                 <td>
                     <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST" accept-charset="UTF-8">
