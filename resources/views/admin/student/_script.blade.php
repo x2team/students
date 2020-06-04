@@ -41,6 +41,9 @@
 
         });
 
+        /**
+        **  Dua du lieu den cac input
+        */
 
         $('#edit-student').on('show.bs.modal', function (event) {
 
@@ -61,7 +64,38 @@
             // modal.find('.modal-body #image').val(image);
             modal.find('.modal-body #birthday').val(birthday);
             modal.find('.modal-body #point').val(point);
-        })
+        });
+
+
+        // Check All
+        // $('#checkedAll').click(function() {
+        //     $(":checkbox").attr("checked", true);
+        // });
+        // // Uncheck All
+        // $('#checkedAll').click(function() {
+        //     $(":checkbox").attr("checked", false);
+        // });
+
+
+        $('#checkedAll').click(function(){
+            console.log(123);
+            if()
+            $(':checkbox').attr('checked','checked');
+        });
+
+        // $(document).ready(function(){
+
+            // $('#checkedAll').toggle(function(){
+            //     console.log(123);
+            //     // $(':checkbox').attr('checked',true);
+            //     // $(this).val('uncheck all')
+            // },function(){
+            //     // $('input:checkbox').removeAttr('checked');
+            //     // $(this).val('check all');        
+            // })
+        // });
+
+
         
     </script>
 @endsection
