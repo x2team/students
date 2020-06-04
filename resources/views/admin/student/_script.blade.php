@@ -67,33 +67,44 @@
         });
 
 
-        // Check All
-        // $('#checkedAll').click(function() {
-        //     $(":checkbox").attr("checked", true);
-        // });
-        // // Uncheck All
-        // $('#checkedAll').click(function() {
-        //     $(":checkbox").attr("checked", false);
-        // });
 
 
-        $('#checkedAll').click(function(){
-            console.log(123);
-            if()
-            $(':checkbox').attr('checked','checked');
+        $('#checkedAll').change(function(){
+            $('.checkbox').prop("checked", $(this).prop('checked'));
         });
+        $('#deleteAll').on('click', function(){
+            var id = $('.checkbox:checked').map(function(){
+                return $(this).val();
+            }).get();
 
-        // $(document).ready(function(){
+            console.log((id));
 
-            // $('#checkedAll').toggle(function(){
-            //     console.log(123);
-            //     // $(':checkbox').attr('checked',true);
-            //     // $(this).val('uncheck all')
-            // },function(){
-            //     // $('input:checkbox').removeAttr('checked');
-            //     // $(this).val('check all');        
-            // })
-        // });
+            var url = "{{ route('admin.student.destroyMulti') }}";
+
+            $.ajax({
+                url: "{{ route('admin.student.destroyMulti') }}",
+                type:  'GET',
+                data: { "ids":id, "_token":"{{csrf_token()}}"  },
+                success: function( result ){
+                    console.log(result);
+                    // if(result == "Oke" ){
+
+                    //     var count_temp = parseInt(rate_count.text())+1;
+                    //     rate_count.html(parseInt(count_temp));
+
+                    //     var imdb_last = (rate_total+score)/count_temp;
+                    //     rate_imdb.html(parseFloat(imdb_last.toFixed(1)));
+
+                    //     alert('Cảm ơn bạn đã đánh giá!');
+                    // }
+                    // if( result == "Fails"){
+                    //     alert('Bạn đã đánh giá rồi! Xin đừng đánh giá nữa.');
+
+                    // }
+                }
+            });
+
+        });
 
 
         

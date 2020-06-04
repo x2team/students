@@ -46,7 +46,7 @@
                         <div class="card-header">
                             <div class="float-left">
                                 
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete All</button>
+                                <button id="deleteAll" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete All</button>
                                 
                                 <a href="{{ route('admin.student.create') }}" class="btn btn-success"><i
                                         class="fa fa-plus"></i> Add New</a>

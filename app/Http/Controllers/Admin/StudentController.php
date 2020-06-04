@@ -162,8 +162,11 @@ class StudentController extends Controller
             if( file_exists($iconFilePath)) unlink($iconFilePath);
         }
     }
-    public function destroyMulti($arr_id)
+    public function destroyMulti(Request $request)
     {
-        dd($arr_id);
+        // return $arr_ids;
+
+        dd($request->all());
     }
+
 }

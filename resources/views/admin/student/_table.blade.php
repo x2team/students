@@ -5,10 +5,8 @@
     <thead>
         <tr>
             <th>
-                {{-- <div class="icheck-success d-inline"> --}}
-                    <input name="checkedAll" type="checkbox" id="checkedAll">
-                    {{-- <label for="checkedAll">STT</label> --}}
-                {{-- </div> --}}
+                <input name="checkedAll" type="checkbox" id="checkedAll">
+                <label for="checkedAll">STT</label>
             </th>
             <th width="80"> Action</th>
             <th>Student Name</th>
@@ -24,11 +22,7 @@
         @foreach($students as $key => $student)           
             <tr>
                 <td>
-                    {{-- <div class="icheck-success d-inline">
-                        <input name="ids_students[]" value="{{ $student->id }}" type="checkbox"  id="ids_students[]">
-                        <label for="ids_students[]"></label>
-                    </div> --}}
-                    <input type="checkbox" value="{{ $student->id }} " name=option[]>
+                    <input class="checkbox" type="checkbox" value="{{ $student->id }}" name="options[]">
                     {{-- <label for="{{$student->id}}"></label> --}}
                 </td>
                 <td>
