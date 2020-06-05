@@ -31,7 +31,7 @@ Route::middleware('verified')->group(function() {
             Route::get('/home', 'HomeController@index')->name('home');
             
 
-            Route::get('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
+            Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
             Route::resource('student', 'StudentController', ['as' => 'admin']);
             
             

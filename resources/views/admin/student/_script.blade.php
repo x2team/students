@@ -83,7 +83,7 @@
 
             $.ajax({
                 url: "{{ route('admin.student.destroyMulti') }}",
-                type:  'GET',
+                type:  'DELETE',
                 data: { "ids":id, "_token":"{{csrf_token()}}"  },
                 success: function( result ){
                     console.log(result);
