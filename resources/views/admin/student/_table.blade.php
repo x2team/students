@@ -1,6 +1,5 @@
 
 
-
 <table id="student" class="table table-bordered table-striped display">
     <thead>
         <tr>
@@ -18,26 +17,36 @@
         </tr>
     </thead>
     <tbody>
-        {{-- <form action="{{ route('admin.student.destroyMulti') }}" method="POST" accept-charset="UTF-8"> --}}
         @foreach($students as $key => $student)           
             <tr>
                 <td>
+                    <label>{{ $key+1 }}</label>
                     <input class="checkbox" type="checkbox" value="{{ $student->id }}" name="options[]">
-                    {{-- <label for="{{$student->id}}"></label> --}}
+                    
                 </td>
                 <td>
                     <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST" accept-charset="UTF-8">
                         @csrf
                         @method("DELETE")
-                        <a title="Edit Student" href="{{ route('admin.student.edit', $student->id) }}" class="btn btn-sm btn-default">
+                        {{-- <a disabled title="Edit Student" href="{{ route('admin.student.edit', $student->id) }}" class="btn btn-sm btn-default">
                             <i class="fa fa-edit"></i>
-                        </a>
+                        </a> --}}
                         <button title="Delete student" onclick="return confirm('Chắc chắn chưa?');" type="submit" class="btn btn-sm btn-danger">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </form>
 
-                    {{-- @include('admin.student._form-modal') --}}
+                    
+                    <!-- Button trigger modal -->
+                    <a type="button" class="btn btn-sm btn-primary edit" data-toggle="modal" data-target="#edit-student"
+                        data-name="{{ $student->name }}"
+                        data-gender="{{ $student->gender }}"
+                        data-image_student="{{ $student->image_url }}"
+                        data-birthday="{{ $student->birthday }}"
+                        data-point="{{ $student->point }}"
+                        data-id="{{ $student->id }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
 
                 </td>
                 <td>{{ Str::limit($student->name, 60) }}</td>
@@ -50,7 +59,7 @@
                 <td><abbr title="{{ $student->dateUpdated(true) }}">{{ $student->dateUpdated() }}<abbr></td>
             </tr>
         @endforeach
-        {{-- </form> --}}
-    </tbody>
-   
+    </tbody>   
 </table>
+
+@include('admin.student._form-modal')
