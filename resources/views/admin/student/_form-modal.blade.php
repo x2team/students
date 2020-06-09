@@ -4,18 +4,7 @@
     @method("PUT")
     @csrf
     
-<!-- Button trigger modal -->
-<a type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#edit-student"
-    data-name="{{ $student->name }}"
-    data-gender="{{ $student->gender }}"
-    data-image_student="{{ $student->image_url }}"
-    data-birthday="{{ $student->birthday }}"
-    data-point="{{ $student->point }}">
-    <i class="fa fa-edit"></i>
-</a>
-
-
-<!-- Modal -->
+<!-- Modal Edit-->
 <div class="modal fade" id="edit-student" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
     aria-labelledby="edit-studentLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -26,18 +15,19 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+
             <div class="modal-body">
-                
+                <input type="hidden" id="studentid" value="" name="id">  
                 <div class="form-group">
                     <label for="name">Tên Sinh vien</label>
-                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name', $student->name) }}" placeholder="Nhập...">
+                    <input id="name" name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $student->name) }}" placeholder="Nhập...">
                     @error('name')
                         <span class="invalid-feedback">{!! $errors->first('name') !!}</span>
                     @enderror
                 </div>
     
                 <div class="form-group">
-                    <select id="gender" name="gender" class="form-control select2bs4 @error('gender') is-invalid @enderror" data-placeholder="Select a State">
+                    <select id="gender" name="gender" class="form-control select2bs4 @error('gender') is-invalid @enderror" data-placeholder="Select a gender">
                         <option value="nam" {{ old('gender', $student->gender) == 'nam' ? "selected":""}}>Nam</option>
                         <option value="nu" {{ old('gender', $student->gender) == 'nu' ? "selected":""}}>Nữ</option>
                         <option value="khac" {{ old('gender', $student->gender) == 'khac' ? "selected":""}}>Giới tính thứ 3</option>
@@ -47,6 +37,17 @@
                     @enderror
                 </div>
     
+                {{-- <div class="form-group @error('image') has-error @enderror">
+                    <label for="image" class="control-label">Pick Image Here</label>
+                    <br>
+                    @error('image')
+                        <span class="help-block">{{ $errors->first('image') }}</span>
+                    @enderror
+                    
+                    <img id="image" width="40px" height="40px" src="#">
+                    <br><br>
+                    <input type="file" name="image">
+                </div> --}}
                 <div class="form-group @error('image') has-error @enderror">
                     <label for="image" class="control-label">Pick Image Here</label>
                     <br>
@@ -54,10 +55,22 @@
                         <span class="help-block">{{ $errors->first('image') }}</span>
                     @enderror
                     
-                    <img width="40px" height="40px" id="image" src="{{ ($student->image_url) ?: 'https://place-hold.it/200x150?text=246x384 or 450x600&italic&bold' }}">
-                    <br><br>
-                    <input id="image" type="file" name="image">
-
+                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
+                            <img id=image class="lazyload" 
+                                src="#">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;">
+                        </div>
+                        <div>
+                            <span class="btn btn-success btn-file">
+                                <span class="fileinput-new">Select image</span>
+                                <span class="fileinput-exists">Change</span>
+                                <input type="file" name="image">
+                            </span>
+                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
+                        </div>
+                    </div>
                 </div>
     
                 <!-- Date dd/mm/yyyy -->
@@ -96,3 +109,19 @@
     </div>
 </div>
 </form>
+
+
+{{-- <script src="http://students.test/admin/plugins/jquery/jquery-3.5.1.js"></script>
+<script>    
+
+
+        //Datemask dd/mm/yyyy
+        $('#birthday').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        });
+
+    
+</script> --}}

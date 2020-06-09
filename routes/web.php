@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Auth::routes();
 
 
@@ -29,8 +30,11 @@ Route::middleware('verified')->group(function() {
             // Route::get('/', 'HomeController@index')->name('home');
             Route::get('/home', 'HomeController@index')->name('home');
             
+
+            Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
             Route::resource('student', 'StudentController', ['as' => 'admin']);
-            Route::delete('student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
+            
+            
 
         });
     });

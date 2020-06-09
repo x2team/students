@@ -10,6 +10,16 @@
   <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> --}}
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    <!-- Toastr Alert -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
 @endsection
 
 
@@ -32,11 +42,6 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-   
-
 
     <div class="content">
         <div class="container-fluid">
@@ -46,7 +51,7 @@
                         <div class="card-header">
                             <div class="float-left">
                                 
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete All</button>
+                                <button id="deleteAll" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete All</button>
                                 
                                 <a href="{{ route('admin.student.create') }}" class="btn btn-success"><i
                                         class="fa fa-plus"></i> Add New</a>
@@ -68,24 +73,5 @@
 
 </div>
 @endsection
-
-{{-- @section('scripts') --}}
-    
-
-    {{-- <script>
-        $(function () {
-          
-          $('#student').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-          });
-        });
-      </script> --}}
-{{-- @endsection --}}
 
 @include('admin.student._script')

@@ -49,22 +49,27 @@
 
 @section('scripts')
     <!-- Select2 -->
-<script src="plugins/select2/js/select2.full.min.js"></script>
+    <script src="plugins/select2/js/select2.full.min.js"></script>
 
-<!-- Jasnybootstrap 4.0.0 : Tao vien cho Khung hinh -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
+    <!-- Jasnybootstrap 4.0.0 : Tao vien cho Khung hinh -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/js/jasny-bootstrap.min.js"></script>
 
-<!-- Lazyload@2.0.0-rc.2 -->
-<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    <!-- Lazyload@2.0.0-rc.2 -->
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
 
-<!-- InputMask -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+    <!-- InputMask -->
+    <script src="plugins/moment/moment.min.js"></script>
+    <script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
 
-<script>
-    //Datemask dd/mm/yyyy
-    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-</script>
+    <script>
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+    </script>
 
 
 @endsection

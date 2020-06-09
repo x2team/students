@@ -127,7 +127,8 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student     = Student::findOrFail($id);
+        // dd($request->id);
+        $student     = Student::findOrFail($request->id);
 
         $oldImage               = $student->image;
         $data                   = $this->handleRequest($request);
@@ -164,8 +165,20 @@ class StudentController extends Controller
             if( file_exists($iconFilePath)) unlink($iconFilePath);
         }
     }
-    public function destroyMulti($arr_id)
+    public function destroyMulti(Request $request)
     {
-        dd($arr_id);
+        $arr_ids = $request->all();
+
+        $students = Student::whereIn('id', $arr_ids)->get();
+
+        foreach($students as $student){
+            $this->removeImage($student->image);
+        }
+        
+        Student::destroy($arr_ids);
+
+        return true;
+        // return redirect()->route('admin.student.index')->with(['message-success' => 'Student was deleted successfully']);
     }
+
 }
