@@ -28,6 +28,8 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $locale = \App::getLocale();
+        dd($locale);
         $students = Student::latestFirst()->get();
         
         return view('admin.student.index', compact('students'));
