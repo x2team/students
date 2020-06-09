@@ -27,6 +27,32 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
+        <!-- Language Dropdown Menu -->
+        <li class="nav-item dropdown">
+            {{-- <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                class="nav-link dropdown-toggle">Dropdown</a> --}}
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            class="nav-link dropdown-toggle">
+                <img src="http://botble40.test/vendor/core/images/flags/us.png" title="English" alt="English">
+                <span class="d-none d-sm-inline">English</span>
+            </a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">        
+                <li class="active">
+                    <a class="dropdown-item" href="http://botble40.test/admin-language/en">
+                        <img src="http://botble40.test/vendor/core/images/flags/us.png" title="English" alt="English">
+                        <span>English</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="http://botble40.test/admin-language/vi">
+                        <img src="http://botble40.test/vendor/core/images/flags/vn.png" title="Tiếng Việt" alt="Tiếng Việt">
+                        <span>Tiếng Việt</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
