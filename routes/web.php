@@ -34,7 +34,7 @@ Route::middleware('verified')->group(function() {
             Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
             Route::resource('student', 'StudentController', ['as' => 'admin']);
             
-            Route::get('lang/{lang}','LangController@changeLang')->name('lang');
+            Route::get('locale/{locale}','LangController@changeLocale')->name('admin.locale');
 
         });
     });

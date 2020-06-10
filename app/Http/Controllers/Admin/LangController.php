@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LangController extends Controller
 {
@@ -11,11 +12,10 @@ class LangController extends Controller
         'vi',
         'en',
     ];
-    public function changeLang(Request $request, $lang)
+    public function changeLocale(Request $request, $locale)
     {
-        if (in_array($lang, $this->langActive)) {
-            $request->session()->put(['lang' => $lang]);
-            return redirect()->back();
-        }
+        Session::put('locale', $locale);
+        
+        return back();
     }
 }

@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="index3.html" class="nav-link">{{ __() }}</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
@@ -39,13 +39,13 @@
             </a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">        
                 <li class="active">
-                    <a class="dropdown-item" href="http://botble40.test/admin-language/en">
+                    <a class="dropdown-item" href="{{ route('admin.locale', ['locale' => 'en']) }}">
                         <img src="{{ asset('admin/icon/us.svg') }}" title="English" width="16" alt="English">
                         <span>English</span>
                     </a>
                 </li>
                 <li>
-                    <a class="dropdown-item" href="http://botble40.test/admin-language/vi">
+                    <a class="dropdown-item" href="{{ route('admin.locale', ['locale' => 'vi']) }}">
                         <img src="{{ asset('admin/icon/vn.svg') }}" title="Tiếng Việt" width="16" alt="Tiếng Việt">
                         <span>Tiếng Việt</span>
                     </a>
