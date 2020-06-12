@@ -13,6 +13,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <title>AdminLTE 3 | Starter</title>
 
+    @yield('styles')
+    
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -20,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    @yield('styles')
+    
 
 </head>
 
@@ -64,20 +66,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    {{-- <script src="plugins/jquery/jquery.min.js"></script> --}}
-    <script src="plugins/jquery/jquery-3.5.1.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
+    {{-- <script src="plugins/jquery/jquery-3.5.1.js"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
     
     <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
     
-
+    @yield('scripts')
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
 
-    @yield('scripts')
+    
 
 </body>
 

@@ -10,6 +10,15 @@ class Student extends Model
         'name', 'gender', 'image', 'birthday', 'point'
     ];
 
+    public function file()
+    {
+        return $this->belongsTo('App\File');
+    }
+
+
+
+
+
 
 
     /**

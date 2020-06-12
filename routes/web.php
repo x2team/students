@@ -28,7 +28,7 @@ Route::middleware('verified')->group(function() {
         Route::prefix('admin')->group(function () {
             
             // Route::get('/', 'HomeController@index')->name('home');
-            Route::get('/home', 'HomeController@index')->name('home');
+            Route::get('/home', 'HomeController@index')->name('admin.home');
             
 
             Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');

@@ -2,12 +2,26 @@
 
 
 @section('styles')
-    <!-- DataTables -->
-    <link rel="stylesheet" href="plugins/datatables/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="plugins/datatables/css/select.dataTables.min.css">
+    <!-- DataTables from AdminLTE -->
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 
-  {{-- <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> --}}
+
+
+    <!-- DataTables -->
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"> --}}
+
+    <!-- Datatables FULL -->
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.css"/> --}}
+
+
+
+
+
+
+
+
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
@@ -16,7 +30,12 @@
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
     <!-- Toastr Alert -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> --}}
+
+    <!-- Toastr Alert from Adminto -->
+    <link rel="stylesheet" href="https://coderthemes.com/adminto/layouts/vertical/assets/libs/toastr/toastr.min.css">
+    <link href="https://coderthemes.com/adminto/layouts/vertical/assets/css/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css">
+    
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
@@ -31,11 +50,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Starter Page</h1>
+                    {{-- <h1 class="m-0 text-dark">{{ __('Starter Page') }}</h1> --}}
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">{{__('Dashboard')}}</a></li>
                         <li class="breadcrumb-item active">Starter Page</li>
                     </ol>
                 </div><!-- /.col -->
@@ -51,10 +70,10 @@
                         <div class="card-header">
                             <div class="float-left">
                                 
-                                <button id="deleteAll" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete All</button>
+                                <button id="deleteAll" type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> {{__('Delete All')}}</button>
                                 
-                                <a href="{{ route('admin.student.create') }}" class="btn btn-success"><i
-                                        class="fa fa-plus"></i> Add New</a>
+                                <a href="{{ route('admin.student.create') }}" class="btn btn-success">
+                                    <i class="fa fa-plus"></i> {{__('Add New')}}</a>
                             </div>
                         </div>
                         <div class="card-body">

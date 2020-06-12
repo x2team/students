@@ -26,13 +26,14 @@ class StudentTableSeeder extends Seeder
         for ($i = 1; $i <= 36; $i++)
         {
             $students[] = [
-                'name'          => $faker->name,
-                'gender'       => $arr[array_rand($arr,1)],
-                'image'       => 'presents/2020/06/picture-01_5ed62a315db9e.jpg',
-                'birthday'       => rand(10,31).'/'.rand(10,12).'/'.rand(1990,2000),
-                'point'       => rand(999,10000),
-                'created_at'    => Carbon::now()->subDay(rand(6, 10))->subHours(rand(1, 5)),
-                'updated_at'    => Carbon::now()->subDay(rand(1, 5))->subHours(rand(1, 5)),
+                'file_id'    => NULL,
+                'name'       => $faker->name,
+                'gender'     => $arr[array_rand($arr,1)],
+                'image'      => 'presents/2020/06/picture-01_5ed62a315db9e.jpg',
+                'birthday'   => rand(10,31).'/'.rand(10,12).'/'.rand(1990,2000),
+                'point'      => rand(999,10000),
+                'created_at' => Carbon::now()->subDay(rand(6, 10))->subHours(rand(1, 5)),
+                'updated_at' => Carbon::now()->subDay(rand(1, 5))->subHours(rand(1, 5)),
             ];
         }
         \DB::table('students')->insert($students);
