@@ -41,7 +41,7 @@ class StudentController extends Controller
                         ->addColumn('action', function ($student) {
                             $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
 
-                            $btnEdit = '<a href="#edit-'.$student->id.'" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>';
+                            $btnEdit = '<a class="btn-edit btn btn-sm btn-primary" data-edit><i class="fa fa-edit"></i></a>';
 
                             return $btnEdit." ".$btnDestroy;
                         })
@@ -168,12 +168,15 @@ class StudentController extends Controller
     public function destroy($id)
     {
         $student = Student::findOrFail($id);
-
-        $this->removeImage($student->image);
         
-        $student->delete();
+        // $this->removeImage($student->image);
+        
+        // $student->delete();
 
-        return redirect()->route('admin.student.index')->with(['message-success' => 'Student was deleted successfully']);
+        // return redirect()->route('admin.student.index')->with(['message-success' => 'Student was deleted successfully']);
+
+        session()->flash('message-success', 'Your post has been deleted successfully');
+        return true;
     }
 
     private function removeImage($oldIcon)

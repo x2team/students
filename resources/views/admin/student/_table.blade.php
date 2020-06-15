@@ -1,5 +1,5 @@
 {{-- <table id="student" class="table table-bordered table-hover dataTable"> --}}
-<table id="student" class="table table-bordered table-striped display dataTable dtr-inline table-hover">
+<table id="student" class="table table-bordered table-striped display dataTable dtr-inline table-hover responsive">
 
     <thead>
         <tr>

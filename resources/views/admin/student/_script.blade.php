@@ -93,7 +93,7 @@
         //         "deferLoading": 34,
         // });
 
-        $('#student').DataTable({
+        var table = $('#student').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -109,9 +109,8 @@
                 {data: 'updated_at'},
                 {data: 'action', orderable: false, className: "text-center"},
             ],
-            
 
-            "order": [[ 6 , 'DESC']],
+            "order": [[ 0 , 'DESC']],
             responsive:  {
                 breakpoints: [
                     {name:       'bigdesktop',   width: Infinity},
@@ -123,9 +122,20 @@
                     {name:       'tabletp',      width: 768},
                     {name:       'mobilel',      width: 480},
                     {name:       'mobilep',      width: 320}
-                ]
+                ],
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal( {
+                        header: function ( row ) {
+                            var data = row.data();
+                            return 'Details for '+data[0]+' '+data[1];
+                        }
+                    } ),
+                    renderer: $.fn.dataTable.Responsive.renderer.tableAll()
+                }
             },
+            // responsive: true,
             autoWidth: false,
+            deferRender: true
 
         });
         /**
@@ -133,23 +143,24 @@
         */
         $('#student').on('click', '.btn-delete[data-remove]', function (e) {
             e.preventDefault();
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             let url = $(this).data('remove');
-
-            if(window.confirm("Bạn có chắc chắn với lựa chọn của mình chưa?")){
+            
+            if(window.confirm("Bạn chắc chưa?")){
                 $.ajax({
                     url: url,
                     type: 'DELETE',
-                    dataType: 'json',
+                    // dataType: 'json',
                     data: {method: '_DELETE', submit: true, },
                     success: function(result){
-                        window.location.href = "/backend/movie";
-                        console.log(result);
+                        setTimeout( function () {
+                            table.ajax.reload();
+                        }, 3000 );
+                        toastr.success('Bạn đã xóa dữ liệu thành công', { timeout:3000});
                     },
                     error: function( error ){
                         alert('Đã có lỗi khi xóa phim. Xóa thất bại');
@@ -157,12 +168,19 @@
                     }
 
                 }).always(function (data) {
-                    $('#movie').DataTable().draw(false);
+                    $('#student').DataTable().draw(false);
                 });
             }
             else{
                 return false;
             }
+        })
+        /**
+        *  Button Edit
+        */
+        .on('click', '.btn-edit[data-edit]', function(){
+            console.log('123');
+            
         });
 
 
