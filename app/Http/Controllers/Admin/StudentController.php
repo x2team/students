@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Http\Requests\Admin;
+use Yajra\DataTables\DataTables;
+
 
 
 class StudentController extends Controller
@@ -26,11 +28,29 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::latestFirst()->get();
+        // $students = Student::latestFirst()->get();
+        if($request->ajax()){
+            $students = Student::select(['id','name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
+            // dd($students);
+            return Datatables::of($students)
+                        ->editColumn('updated_at', function ($student) {
+                            return '<abbr title="'. $student->dateUpdated(true) . '">' . $student->dateUpdated() . '</abbr>';
+                        })
+                        ->addColumn('action', function ($student) {
+                            $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
+
+                            $btnEdit = '<a href="#edit-'.$student->id.'" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>';
+
+                            return $btnEdit." ".$btnDestroy;
+                        })
+                        ->rawColumns(['updated_at', 'action'])
+                        ->make(true);
+        }
         
-        return view('admin.student.index', compact('students'));
+        
+        return view('admin.student.index');
     }
 
     /**

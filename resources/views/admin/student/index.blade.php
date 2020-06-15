@@ -3,9 +3,8 @@
 
 @section('styles')
     <!-- DataTables from AdminLTE -->
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-
+    {{-- <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> --}}
 
 
     <!-- DataTables -->
@@ -13,31 +12,28 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"> --}}
 
     <!-- Datatables FULL -->
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.css"/> --}}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.css"/>
+    <!-- Datatables Select -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"/>
 
 
 
-
-
-
-
-
-  <!-- iCheck for checkboxes and radio inputs -->
-  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
     <!-- Select2 -->
     <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 
     <!-- Toastr Alert -->
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!-- Toastr Alert from Adminto -->
-    <link rel="stylesheet" href="https://coderthemes.com/adminto/layouts/vertical/assets/libs/toastr/toastr.min.css">
-    <link href="https://coderthemes.com/adminto/layouts/vertical/assets/css/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css">
+    {{-- <link rel="stylesheet" href="https://coderthemes.com/adminto/layouts/vertical/assets/libs/toastr/toastr.min.css">
+    <link href="https://coderthemes.com/adminto/layouts/vertical/assets/css/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css"> --}}
     
 
-    <!-- Latest compiled and minified CSS -->
+    <!-- Jasny Bootstrap -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/4.0.0/css/jasny-bootstrap.min.css">
 @endsection
 

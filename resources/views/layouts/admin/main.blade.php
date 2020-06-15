@@ -6,23 +6,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <base href="{{ asset('admin') }}/">
+    {{-- <base href="{{ asset('admin') }}/"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>AdminLTE 3 | Starter</title>
 
-    @yield('styles')
-    
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    @yield('styles')
+
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    
 
 </head>
 
@@ -57,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Anything you want
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
+            <strong>Copyright &copy; 2014-2019 <a href="#">AdminLTE.io</a>.</strong> All rights
             reserved.
         </footer>
     </div>
@@ -66,8 +69,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- REQUIRED SCRIPTS -->
 
     <!-- jQuery -->
-    <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script>
-    {{-- <script src="plugins/jquery/jquery-3.5.1.js"></script> --}}
+    {{-- <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
     
     <!-- Bootstrap 4 -->
@@ -79,7 +82,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
-
+    <!-- AdminLTE for demo purposes -->
+    <script src="https://adminlte.io/themes/v3/dist/js/demo.js"></script>
     
 
 </body>

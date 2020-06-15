@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     protected $fillable = [
-        'name', 'gender', 'image', 'birthday', 'point'
+        'file_id', 'name', 'gender', 'image', 'birthday', 'point'
     ];
 
     public function file()
