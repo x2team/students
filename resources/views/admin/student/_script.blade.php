@@ -203,6 +203,7 @@
                 },
                 error: function( error ){
                     alert('Đã có lỗi khi edit');
+                    console.log(error);
                 }
             });
         });
@@ -220,9 +221,9 @@
 
             var form_data = $(this).serialize();
             var id = $('#id').val();
-            let myForm = document.getElementById('#edit-modal');
-            let formData = new FormData(myForm);
-            console.log(formData);
+            // let myForm = document.getElementById('#edit-modal');
+            // let formData = new FormData(myForm);
+            // console.log(formData);
             $.ajax({
                 url: "{{ route('admin.student.update', "+id+") }}",
                 method: "PUT",
@@ -230,11 +231,32 @@
                 // dataType:"json",
                 success: function(data){
                     
-                        console.log('success');
+                    if($.isEmptyObject(data.errors)){
+                        alert(data.success);
+                    }else{
+                        printErrorMsg(data.errors);
+                    }
+ 
 
+                },
+                error: function( errors ){
+                    alert('Đã có lỗi khi khi submit to edit');
+                    console.log(errors);
                 }
             });
         });
+        function printErrorMsg (msg) {
+            $(".alert-danger").find("ul").html('');
+            $(".alert-danger").css('display','block');
+            $.each( msg, function( key, value ) {
+                // console.log(key);
+                // console.log(value);
+                $(".alert-danger").find("ul").append('<li>'+value+'</li>');
+                $("#name").addClass('is-invalid');
+                $("#"+key).after('');
+                $("#"+key).after('<span class="invalid-feedback">'+value+'</span>');
+            });
+        }
 
 
         /**

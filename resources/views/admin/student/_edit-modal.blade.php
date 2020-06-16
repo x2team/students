@@ -15,12 +15,24 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            
+            
 
             <div class="modal-body">
+
+                <div class="form-group">
+                    <div class="alert alert-danger" style="display:none">
+                        <ul></ul>
+                    </div>
+                </div>
+
                 <input type="hidden" id="id" value="" name="id">  
                 <div class="form-group">
                     <label for="name">Tên Sinh vien</label>
-                    <input id="name" type="text" name="name" class="form-control" value="">
+                    <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="">
+                    @error('name')
+                        <span class="invalid-feedback">{!! $errors->first('name') !!}</span>
+                    @enderror
                 </div>
     
                 <div class="form-group">

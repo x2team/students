@@ -9,6 +9,8 @@ use Illuminate\Support\Str;
 
 use App\Http\Requests\Admin;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -152,18 +154,34 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
-        $student     = Student::findOrFail($request->id);
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'max:255'],
+            'gender' => ['required'],
+            'birthday' => ['required'],
+            'point' => ['required']
+        ]);
+        
+       
 
-        $oldImage               = $student->image;
-        $data                   = $this->handleRequest($request);
+        // $student     = Student::findOrFail($request->id);
 
-        $student->update($data);
+        // $oldImage               = $student->image;
+        // $data                   = $this->handleRequest($request);
 
-        if($oldImage !== $student->image){
-            $this->removeImage($oldImage);
+        // $student->update($data);
+
+        // if($oldImage !== $student->image){
+        //     $this->removeImage($oldImage);
+        // }
+        
+        // return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
+        if ($validator->fails())
+        {
+            // return response()->json(['errors' => $validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()]);
+
         }
-        return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
+        return response()->json(['success'=>'Data is successfully edited']);
     }
 
     /**
