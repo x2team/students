@@ -107,7 +107,7 @@
                 {data: 'point'},
                 {data: 'birthday'},
                 {data: 'updated_at'},
-                {data: 'action', orderable: false, className: "text-center"},
+                {data: 'action', orderable: false, className: "text-center", searchable: false},
             ],
 
             "order": [[ 0 , 'DESC']],
@@ -138,9 +138,11 @@
             deferRender: true
 
         });
+        
+        
         /**
-        *  Button Delete
-        */
+         * Button Delete - Server-Side
+         */
         $('#student').on('click', '.btn-delete[data-remove]', function (e) {
             e.preventDefault();
             $.ajaxSetup({
@@ -166,7 +168,6 @@
                         alert('Đã có lỗi khi xóa phim. Xóa thất bại');
                         console.log(error);
                     }
-
                 }).always(function (data) {
                     $('#student').DataTable().draw(false);
                 });
@@ -176,65 +177,111 @@
             }
         })
         /**
-        *  Button Edit
-        */
-        .on('click', '.btn-edit[data-edit]', function(){
-            console.log('123');
-            
+         * Button Edit : Server-Side
+         */
+        .on('click', '.edit', function(){
+            var id = $(this).attr('id');
+            $.ajax({
+                url: "{{ route('admin.student.fetchdata') }}",
+                method: 'GET',
+                dataType: 'json',
+                data: {id: id},
+                success: function(data){
+                    console.log(data);
+                    $('#name').val(data.name);
+                    $('#gender').val(data.gender);
+                    var image_url = 'storage/' + data.image;
+                    $('#image').attr("src", '{!! asset("'+image_url+'") !!}');
+                    $('#birthday').val(data.birthday);
+                    $('#point').val(data.point);
+                    $('#id').val(data.id);
+
+                    $('#edit-student').modal('show');
+                    $('.modal-title').text('Edit Student');
+                    // $('#action').val('Edit');
+                    // $('#button_action').val('update');
+                },
+                error: function( error ){
+                    alert('Đã có lỗi khi edit');
+                }
+            });
+        });
+
+        /**
+         * Submit Form #edit-modal
+         */
+         $('#edit-modal').on('submit', function(event){
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var form_data = $(this).serialize();
+            var id = $('#id').val();
+            let myForm = document.getElementById('#edit-modal');
+            let formData = new FormData(myForm);
+            console.log(formData);
+            $.ajax({
+                url: "{{ route('admin.student.update', "+id+") }}",
+                method: "PUT",
+                data: form_data,
+                // dataType:"json",
+                success: function(data){
+                    
+                        console.log('success');
+
+                }
+            });
         });
 
 
         /**
-        **  Edit modal
-        */
-        $('#edit-student').on('show.bs.modal', function (event) {
+         * Button Edit with Modal using Bootstrap
+         */
+        // $('#edit-student').on('show.bs.modal', function (event) {
+        //     var button = $(event.relatedTarget); // Button that triggered the modal
+        //     var name = button.data('name'); // Extract info from data-* attributes
+        //     var gender = button.data('gender');
+        //     var image_student = button.data('image_student');
+        //     var birthday = button.data('birthday');
+        //     var point = button.data('point');
+        //     var id = button.data('id');
 
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var name = button.data('name'); // Extract info from data-* attributes
-            var gender = button.data('gender');
-            var image_student = button.data('image_student');
-            var birthday = button.data('birthday');
-            var point = button.data('point');
-            var id = button.data('id');
+        //     console.log(image_student);
 
-            console.log(image_student);
-
-            var modal = $(this)
-            // modal.find('.modal-title').text('New message to ' + name)
-            modal.find('.modal-body #name').val(name);
-            modal.find('.modal-body #gender').val(gender);
-            modal.find('.modal-body #image').attr('src', image_student);
-            modal.find('.modal-body #birthday').val(birthday);
-            modal.find('.modal-body #point').val(point);
-            modal.find('.modal-body #studentid').val(id);
-        });
-
-        // var table = $('#student').DataTable();
-        //     table.on('click', '.edit', function(){
-        //         $tr = $(this).closest('tr');
-        //         if($($tr).hasClass('child')){
-        //             $tr = $tr.prev('.parent');
-        //         }
-
-        //         var data = table.row($tr).data();
-        //         console.log(data);
-        //     });
+        //     var modal = $(this)
+        //     // modal.find('.modal-title').text('New message to ' + name)
+        //     modal.find('.modal-body #name').val(name);
+        //     modal.find('.modal-body #gender').val(gender);
+        //     modal.find('.modal-body #image').attr('src', image_student);
+        //     modal.find('.modal-body #birthday').val(birthday);
+        //     modal.find('.modal-body #point').val(point);
+        //     modal.find('.modal-body #studentid').val(id);
+        // });
 
 
 
-        //Datemask dd/mm/yyyy
+
+        /**
+         * Datemask dd/mm/yyyy
+         */
         $('#birthday').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
 
-        //Initialize Select2 Elements
-        $('#gender').select2({
+
+        /**
+         * Initialize Select2 Elements
+         */
+        $('#student_gender').select2({
             theme: 'bootstrap4'
-        })
+        });
 
 
 
-
-
-        // Delete all button
+        /**
+         * Button Delete All
+         */
         $('#checkedAll').change(function(){
             $('.checkbox').prop("checked", $(this).prop('checked'));
         });
@@ -250,13 +297,13 @@
                     type:  'DELETE',
                     data: { "ids":id, "_token":"{{csrf_token()}}"  },
                     success: function( result ){
-                        console.log(result);
                         if(result){
-                            toastr.success('Bạn đã xóa dữ liệu thành công', { timeout:5000});
                             // $("#student").DataTable().ajax.reload();
-                            
-                            location.reload();
-
+                            setTimeout( function () {
+                                table.ajax.reload();
+                            }, 3000 );
+                            toastr.success('Bạn đã xóa dữ liệu thành công', { timeout:5000});
+                            // location.reload();
                         }
                     }
                 });

@@ -13,40 +13,27 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    {{-- <form class="form-inline ml-3">
-        <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
         <!-- Language Dropdown Menu -->
         <li class="nav-item dropdown">
-            {{-- <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                class="nav-link dropdown-toggle">Dropdown</a> --}}
             @if(app()->isLocale('en'))
-                <a id="dropdownSubMenu1" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 class="nav-link dropdown-toggle">
                     <img src="{{ asset('admin/icon/us.svg') }}" title="English" width="16" alt="English">
                     <span class="d-none d-sm-inline">English</span>
                 </a>
             @else
-                <a id="dropdownSubMenu1" href="javascript:;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 class="nav-link dropdown-toggle">
                     <img src="{{ asset('admin/icon/vn.svg') }}" title="English" width="16" alt="English">
                     <span class="d-none d-sm-inline">Tiếng Việt</span>
                 </a>
             @endif
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow" style="left: 0px; right: inherit;">        
-                <li class="active">
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">        
+                <li>
                     <a class="dropdown-item" href="{{ route('admin.locale', ['locale' => 'en']) }}">
                         <img src="{{ asset('admin/icon/us.svg') }}" title="English" width="16" alt="English">
                         <span>English</span>

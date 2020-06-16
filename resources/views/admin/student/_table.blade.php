@@ -1,4 +1,6 @@
 {{-- <table id="student" class="table table-bordered table-hover dataTable"> --}}
+
+    @include('admin.student._edit-modal')
 <table id="student" class="table table-bordered table-striped display dataTable dtr-inline table-hover responsive">
 
     <thead>
@@ -53,4 +55,4 @@
     </tbody>    --}}
 </table>
 
-{{-- @include('admin.student._form-modal') --}}
+

@@ -31,9 +31,13 @@ Route::middleware('verified')->group(function() {
             Route::get('/home', 'HomeController@index')->name('admin.home');
             
 
+            Route::get('/student/fetchdata','StudentController@fetchdata')->name('admin.student.fetchdata');
             Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
             Route::resource('student', 'StudentController', ['as' => 'admin']);
             
+
+
+
             Route::get('locale/{locale}','LangController@changeLocale')->name('admin.locale');
 
         });

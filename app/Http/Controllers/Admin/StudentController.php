@@ -34,14 +34,14 @@ class StudentController extends Controller
         if($request->ajax()){
             $students = Student::select(['id','name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
             // dd($students);
-            return Datatables::of($students)
+            return DataTables::of($students)
                         ->editColumn('updated_at', function ($student) {
                             return '<abbr title="'. $student->dateUpdated(true) . '">' . $student->dateUpdated() . '</abbr>';
                         })
                         ->addColumn('action', function ($student) {
                             $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
 
-                            $btnEdit = '<a class="btn-edit btn btn-sm btn-primary" data-edit><i class="fa fa-edit"></i></a>';
+                            $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
 
                             return $btnEdit." ".$btnDestroy;
                         })
@@ -52,7 +52,14 @@ class StudentController extends Controller
         
         return view('admin.student.index');
     }
-
+    public function fetchdata(Request $request)
+    {
+        $id = $request->input('id');
+        $student = Student::findOrFail($id);
+        
+        return $student;
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -145,7 +152,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->id);
+        dd($request->all());
         $student     = Student::findOrFail($request->id);
 
         $oldImage               = $student->image;
