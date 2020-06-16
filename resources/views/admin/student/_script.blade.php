@@ -232,11 +232,15 @@
                 success: function(data){
                     
                     if($.isEmptyObject(data.errors)){
-                        alert(data.success);
+                        $('#edit-student').modal('hide');
+                        setTimeout( function () {
+                            table.ajax.reload();
+                        }, 3000 );
+                        toastr.success('Edit dữ liệu thành công', { timeout:3000});
                     }else{
                         printErrorMsg(data.errors);
                     }
- 
+
 
                 },
                 error: function( errors ){
@@ -246,15 +250,11 @@
             });
         });
         function printErrorMsg (msg) {
-            $(".alert-danger").find("ul").html('');
-            $(".alert-danger").css('display','block');
-            $.each( msg, function( key, value ) {
-                // console.log(key);
-                // console.log(value);
-                $(".alert-danger").find("ul").append('<li>'+value+'</li>');
-                $("#name").addClass('is-invalid');
-                $("#"+key).after('');
-                $("#"+key).after('<span class="invalid-feedback">'+value+'</span>');
+            // $(".alert-danger").find("ul").html('');
+            // $(".alert-danger").css('display','block');
+            $.each( msg, function( key, value ) {                
+                $("#"+key).addClass('is-invalid');                
+                $("#"+key).parent().find('.invalid-feedback').text(value);
             });
         }
 
@@ -295,7 +295,7 @@
         /**
          * Initialize Select2 Elements
          */
-        $('#student_gender').select2({
+        $('#gender').select2({
             theme: 'bootstrap4'
         });
 

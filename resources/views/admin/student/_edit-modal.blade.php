@@ -30,9 +30,7 @@
                 <div class="form-group">
                     <label for="name">Tên Sinh vien</label>
                     <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="">
-                    @error('name')
-                        <span class="invalid-feedback">{!! $errors->first('name') !!}</span>
-                    @enderror
+                    <span class="invalid-feedback"></span>
                 </div>
     
                 <div class="form-group">
@@ -41,6 +39,7 @@
                         <option value="nu">Nữ</option>
                         <option value="khac">Giới tính thứ 3</option>
                     </select>
+                    <span class="invalid-feedback"></span>
                 </div>
     
                 <div class="form-group">
@@ -73,8 +72,8 @@
                             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
                         </div>
                         <input id="birthday" name="birthday" type="text" class="form-control" data-inputmask-alias="datetime"
-                            data-inputmask-inputformat="dd/mm/yyyy" data-mask
-                            value="">
+                            data-inputmask-inputformat="dd/mm/yyyy" data-mask value="">
+                        <span class="invalid-feedback"></span>
                     </div>
                   </div>
     
@@ -82,6 +81,7 @@
                     <label for="point">Điểm</label>
                     <input name="point" type="number" class="form-control" id="point"
                         value="" placeholder="Nhập...">
+                    <span class="invalid-feedback"></span>
                 </div>
 
             </div>
