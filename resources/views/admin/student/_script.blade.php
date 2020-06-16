@@ -183,7 +183,7 @@
             var id = $(this).attr('id');
             $.ajax({
                 url: "{{ route('admin.student.fetchdata') }}",
-                method: 'GET',
+                type: 'GET',
                 dataType: 'json',
                 data: {id: id},
                 success: function(data){
@@ -221,14 +221,22 @@
 
             var form_data = $(this).serialize();
             var id = $('#id').val();
-            // let myForm = document.getElementById('#edit-modal');
-            // let formData = new FormData(myForm);
-            // console.log(formData);
+
+            // let myForm = document.getElementById('edit-modal');
+
+            let formData = new FormData();
+            formData.append('image', $('input[type=file]')[0].files[0]);
+     
+            console.log(formData);
+
             $.ajax({
                 url: "{{ route('admin.student.update', "+id+") }}",
-                method: "PUT",
-                data: form_data,
-                // dataType:"json",
+                type: "PUT",
+                data: { formData},
+                dataType:'JSON',
+                contentType: false,
+                cache: false,
+                processData: false,
                 success: function(data){
                     
                     if($.isEmptyObject(data.errors)){

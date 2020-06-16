@@ -154,6 +154,9 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        dd($request->file('image'));
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
             'gender' => ['required'],
