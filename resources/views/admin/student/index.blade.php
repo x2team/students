@@ -15,7 +15,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.css"/>
     <!-- Datatables Select -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"/>
-
+    <!-- Datatables Search Highlight -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.css"/>
 
 
     <!-- iCheck for checkboxes and radio inputs -->

@@ -56,10 +56,13 @@ class StudentController extends Controller
     }
     public function fetchdata(Request $request)
     {
-        $id = $request->input('id');
-        $student = Student::findOrFail($id);
+        if($request->ajax()){
+            $id = $request->input('id');
+            $student = Student::findOrFail($id);
+            
+            return $student;
+        }
         
-        return $student;
     }
     
     /**
@@ -80,7 +83,7 @@ class StudentController extends Controller
      */
     public function store(Admin\StudentStoreRequest $request)
     {
-        
+        dd($request->all());
         $data = $this->handleRequest($request);
 
         Student::create($data);
@@ -155,27 +158,25 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
 
-        dd($request->file('image'));
-
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:255'],
             'gender' => ['required'],
             'birthday' => ['required'],
-            'point' => ['required']
+            'point' => ['required'],
         ]);
         
-       
 
-        // $student     = Student::findOrFail($request->id);
 
-        // $oldImage               = $student->image;
-        // $data                   = $this->handleRequest($request);
+        $student     = Student::findOrFail($request->id);
 
-        // $student->update($data);
+        $oldImage               = $student->image;
+        $data                   = $this->handleRequest($request);
 
-        // if($oldImage !== $student->image){
-        //     $this->removeImage($oldImage);
-        // }
+        $student->update($data);
+
+        if($oldImage !== $student->image){
+            $this->removeImage($oldImage);
+        }
         
         // return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
         if ($validator->fails())

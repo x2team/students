@@ -1,8 +1,8 @@
 
 
-<form id="edit-modal" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
-    @method("PUT")
-    @csrf
+
+
+
     
 <!-- Modal Edit-->
 <div class="modal fade" id="edit-student" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
@@ -17,16 +17,18 @@
             </div>
             
             
-
+        <form id="edit-modal" method="POST" accept-charset="UTF-8" enctype="multipart/form-data">
+            @csrf
             <div class="modal-body">
-
+                
                 <div class="form-group">
                     <div class="alert alert-danger" style="display:none">
                         <ul></ul>
                     </div>
                 </div>
 
-                <input type="hidden" id="id" value="" name="id">  
+                <input type="hidden" id="id" value="" name="id">
+
                 <div class="form-group">
                     <label for="name">Tên Sinh vien</label>
                     <input id="name" type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="">
@@ -48,8 +50,7 @@
                     
                     <div class="fileinput fileinput-new" data-provides="fileinput">
                         <div class="fileinput-new img-thumbnail" style="width: 200px; height: 150px;">
-                            <img id=image class="lazyload" 
-                                src="#">
+                            <img id="student_image" class="lazyload" src="#">
                         </div>
                         <div class="fileinput-preview fileinput-exists img-thumbnail" style="max-width: 200px; max-height: 150px;">
                         </div>
@@ -57,7 +58,7 @@
                             <span class="btn btn-success btn-file">
                                 <span class="fileinput-new">Select image</span>
                                 <span class="fileinput-exists">Change</span>
-                                <input id="image_file" type="file" name="image">
+                                <input name="image" id="image" type="file">
                             </span>
                             <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a>
                         </div>
@@ -90,8 +91,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
 
-</form>

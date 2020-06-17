@@ -18,6 +18,11 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.js"></script>
     <!-- Datatables Select -->
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+    <!-- Datatables Search Highlight -->
+    <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
+    <script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+    
+
 
    
 
@@ -103,7 +108,13 @@
                 {data: 'id', orderable: false, className: "text-center"},
                 {data: 'name'},
                 {data: 'gender', className: "text-center"},
-                {data: 'image'},
+                {
+                    data: 'image',
+                    name: 'image',
+                    render: function(data, type, full, meta){
+                        return '<img src={!! asset("storage/'+data+'") !!} width="50" style="height:50px !important" class="img-thumbnail" />';
+                    }
+                },
                 {data: 'point'},
                 {data: 'birthday'},
                 {data: 'updated_at'},
@@ -138,6 +149,15 @@
             deferRender: true
 
         });
+        /**
+         * Search HighLight
+         */
+        table.on( 'draw', function () {
+            var body = $( table.table().body() );
+    
+            body.unhighlight();
+            body.highlight( table.search() );  
+        } );
         
         
         /**
@@ -187,19 +207,23 @@
                 dataType: 'json',
                 data: {id: id},
                 success: function(data){
-                    console.log(data);
+
                     $('#name').val(data.name);
                     $('#gender').val(data.gender);
-                    var image_url = 'storage/' + data.image;
-                    $('#image').attr("src", '{!! asset("'+image_url+'") !!}');
+                    // $('#gender').attr(data.gender);
+
+                    var image_url = "{{ asset('storage/:data.image') }}";
+                    image_url = image_url.replace(':data.image', data.image);
+
+                    $('.fileinput-preview').parent().find('img').attr('src', image_url);
+                    $('img#student_image').attr("src", image_url);
                     $('#birthday').val(data.birthday);
                     $('#point').val(data.point);
                     $('#id').val(data.id);
 
                     $('#edit-student').modal('show');
                     $('.modal-title').text('Edit Student');
-                    // $('#action').val('Edit');
-                    // $('#button_action').val('update');
+
                 },
                 error: function( error ){
                     alert('Đã có lỗi khi edit');
@@ -218,38 +242,38 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
-            var form_data = $(this).serialize();
+            
+            // var form_data = $(this).serialize();
             var id = $('#id').val();
 
-            // let myForm = document.getElementById('edit-modal');
+            var formData = new FormData(document.getElementById('edit-modal'));
 
-            let formData = new FormData();
-            formData.append('image', $('input[type=file]')[0].files[0]);
+            // var formData = new FormData();
+            // formData.set('image', $('input[type=file]')[0].files[0], 'abc.jpg');
      
-            console.log(formData);
+            var url = "{{ route('admin.student.update', ':id') }}";
+            url = url.replace(':id', id);
 
             $.ajax({
-                url: "{{ route('admin.student.update', "+id+") }}",
-                type: "PUT",
-                data: { formData},
-                dataType:'JSON',
-                contentType: false,
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: 'json',
+                enctype: 'multipart/form-data',
                 cache: false,
+                contentType: false,
                 processData: false,
                 success: function(data){
-                    
                     if($.isEmptyObject(data.errors)){
                         $('#edit-student').modal('hide');
-                        setTimeout( function () {
-                            table.ajax.reload();
-                        }, 3000 );
+                        table.ajax.reload();
+                        // setTimeout( function () {
+                        //     table.ajax.reload();
+                        // }, 3000 );
                         toastr.success('Edit dữ liệu thành công', { timeout:3000});
                     }else{
                         printErrorMsg(data.errors);
                     }
-
-
                 },
                 error: function( errors ){
                     alert('Đã có lỗi khi khi submit to edit');
@@ -303,9 +327,9 @@
         /**
          * Initialize Select2 Elements
          */
-        $('#gender').select2({
-            theme: 'bootstrap4'
-        });
+        // $('#gender').select2({
+        //     theme: 'bootstrap4'
+        // });
 
 
 

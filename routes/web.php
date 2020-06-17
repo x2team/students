@@ -33,7 +33,8 @@ Route::middleware('verified')->group(function() {
 
             Route::get('/student/fetchdata','StudentController@fetchdata')->name('admin.student.fetchdata');
             Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
-            Route::resource('student', 'StudentController', ['as' => 'admin']);
+            Route::resource('student', 'StudentController', ['as' => 'admin'])->except('update');
+            Route::POST('student/{student}', 'StudentController@update')->name('admin.student.update');
             
 
 
