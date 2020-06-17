@@ -165,7 +165,14 @@ class StudentController extends Controller
             'point' => ['required'],
         ]);
         
+   
+        // return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
+        if ($validator->fails())
+        {
+            // return response()->json(['errors' => $validator->errors()->all()]);
+            return response()->json(['errors' => $validator->errors()]);
 
+        }
 
         $student     = Student::findOrFail($request->id);
 
@@ -176,14 +183,6 @@ class StudentController extends Controller
 
         if($oldImage !== $student->image){
             $this->removeImage($oldImage);
-        }
-        
-        // return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
-        if ($validator->fails())
-        {
-            // return response()->json(['errors' => $validator->errors()->all()]);
-            return response()->json(['errors' => $validator->errors()]);
-
         }
         return response()->json(['success'=>'Data is successfully edited']);
     }
