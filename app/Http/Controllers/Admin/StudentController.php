@@ -232,11 +232,12 @@ class StudentController extends Controller
 
     public function importExcel(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'excel_file' => 'required|mimes:xls,xlsx'
         ]);
 
-        
+
     }
 
 }

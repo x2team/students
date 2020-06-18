@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="float-right">
-                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('admin.student.importExcel') }}">
+                                <form id="excelFile" method="POST" action="{{ route('admin.student.importExcel') }}" enctype="multipart/form-data">
                                     @csrf
                                     
                                     {{-- <div class="input-group">
@@ -97,16 +97,17 @@
                                         </div>
                                     </div> --}}
                                     
-                                    <div class="form-group">
-                                        <!-- <label for="customFile">Custom File</label> -->
-                    
+                                    <div class="input-group">
                                         <div class="custom-file">
-                                          <input type="file" class="custom-file-input" id="customFile">
-                                          <label class="custom-file-label" for="customFile">Choose file</label>
+                                          <input type="file" class="custom-file-input" id="excel_file">
+                                          <label class="custom-file-label" for="excel_file">Chọn .xls .xlsx</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                          
+                                          <button type="submit" class="btn btn-sm btn-success"><i class="far fa-file-excel"></i> Upload Data</button>
+                                          
                                         </div>
                                       </div>
-                                      <div class="form-group">
-                                      </div
                                     
                                 </form>
                             </div>
