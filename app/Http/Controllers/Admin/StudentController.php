@@ -235,6 +235,8 @@ class StudentController extends Controller
         $this->validate($request, [
             'excel_file' => 'required|mimes:xls,xlsx'
         ]);
+
+        
     }
 
 }

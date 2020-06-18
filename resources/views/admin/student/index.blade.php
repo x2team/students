@@ -79,9 +79,36 @@
                                 <a href="{{ route('admin.student.create') }}" class="btn btn-success">
                                     <i class="fa fa-plus"></i> {{__('Add New')}}</a>
 
-                                <button class="btn btn-outline-dark" id="controlPanel">
-                                    ABC
-                                </button>
+                                    
+                            </div>
+
+                            <div class="float-right">
+                                <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('admin.student.importExcel') }}">
+                                    @csrf
+                                    
+                                    {{-- <div class="input-group">
+                                        <div class="custom-file">
+                                          <input name="excel_file" type="file" class="custom-file-input" id="exampleInputFile">
+                                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                        
+                                          <button type="submit" name="upload" class="btn btn-sm btn-success"><i class="far fa-file-excel"></i> Upload data</button>
+                                        </div>
+                                    </div> --}}
+                                    
+                                    <div class="form-group">
+                                        <!-- <label for="customFile">Custom File</label> -->
+                    
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input" id="customFile">
+                                          <label class="custom-file-label" for="customFile">Choose file</label>
+                                        </div>
+                                      </div>
+                                      <div class="form-group">
+                                      </div
+                                    
+                                </form>
                             </div>
                         </div>
                         <div class="card-body">

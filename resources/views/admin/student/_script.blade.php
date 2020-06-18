@@ -76,6 +76,8 @@
     <!-- InputMask -->
     <script src="plugins/moment/moment.min.js"></script>
     <script src="plugins/inputmask/min/jquery.inputmask.bundle.min.js"></script>
+    <!-- bs-custom-file-input -->
+    <script src="http://students.test/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 
     <script type="text/javascript">
@@ -221,11 +223,11 @@
                 },
                 {
                     extend: "pdfHtml5",
-                    className: "btn-sm btn-success",
+                    className: "btn-sm btn-outline-success",
                     titleAttr: 'Pdf Html5',
                     text: 'PDF',
                     init: function(api, node, config) {
-                        $(node).removeClass('btn-default');
+                        $(node).removeClass('btn-default btn-secondary');
                     }
                 },
                 {
@@ -491,10 +493,11 @@
                 return false;
             }
 
+        });
 
-            
-            
-
+        
+        $(document).ready(function () {
+            bsCustomFileInput.init();
         });
 
 

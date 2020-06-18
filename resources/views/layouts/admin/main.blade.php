@@ -19,12 +19,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
-    @yield('styles')
+    
 
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700?v=1.0.1" rel="stylesheet">
+    
+    @yield('styles')
     
 
 </head>
@@ -78,13 +80,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
     
-    @yield('scripts')
+    
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="https://adminlte.io/themes/v3/dist/js/demo.js"></script>
     
+    @yield('scripts')
 
 </body>
 
