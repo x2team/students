@@ -15,16 +15,46 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script> --}}
 
     <!-- Datatables FULL -->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    
     <!-- Datatables Select -->
     <script type="text/javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
     <!-- Datatables Search Highlight -->
     <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.min.js"></script>
     <script type="text/javascript" src="https://bartaz.github.io/sandbox.js/jquery.highlight.js"></script>
+    <!-- Datatables Responsive -->
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+    <!-- Datatables Buttons -->
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.bootstrap4.min.js"></script>
+    
+    <!-- Datatables Buttons - Column visibility control -->
+    {{-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.colVis.min.js"></script>
+    <!-- Datatables Buttons - Flash export buttons -->
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <!-- Datatables Buttons - HTML5 export buttons -->
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <!-- Datatables Buttons - Print button -->
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script> --}}
+
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
     
 
+    <!-- Datatables ColReorder -->
+    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.2/js/dataTables.colReorder.min.js"></script>
 
-   
+
+
+
+
 
     <!-- Select2 -->
     <script src="plugins/select2/js/select2.full.min.js"></script>
@@ -146,7 +176,102 @@
             },
             // responsive: true,
             autoWidth: false,
-        
+            
+
+            // dom: 'BS<"clear">lfrtip',
+            // buttons: [
+            //     'excel', 'pdf', 'print',
+            //     {
+            //         text: 'Green',
+            //         className: 'green'
+            //     }
+            // ],
+            lengthMenu: [
+                [ 10, 25, 50, -1 ],
+                [ '10', '25', '50', 'All' ]
+            ],
+
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: "copyHtml5",
+                    className: "btn-sm btn-outline-success",
+                    titleAttr: 'Copy all',
+                    text: 'copy',
+                    init: function(api, node, config) {
+                        $(node).removeClass('btn-default btn-secondary');
+                    },
+                    
+                },
+                {
+                    extend: "excel",
+                    className: "btn-sm btn-outline-success",
+                    titleAttr: 'Export in Excel',
+                    text: '<i class="fas fa-file-excel"></i>Excel',
+                    title: 'DataExcel',
+                    init: function(api, node, config) {
+                        $(node).removeClass('btn-default btn-secondary');
+                    },
+                    exportOptions: {
+                        modifier: {
+                            search: 'applied',
+                            order: 'applied'
+                        }
+                    }
+                },
+                {
+                    extend: "pdfHtml5",
+                    className: "btn-sm btn-success",
+                    titleAttr: 'Pdf Html5',
+                    text: 'PDF',
+                    init: function(api, node, config) {
+                        $(node).removeClass('btn-default');
+                    }
+                },
+                {
+                    extend: "print",
+                    className: "btn-sm btn-outline-success",
+                    titleAttr: 'Print',
+                    text: '<i class="fas fa-print"></i>Print',
+                    init: function(api, node, config) {
+                        $(node).removeClass('btn-default btn-secondary');
+                    }
+                }
+            ]
+
+            // buttons: [{
+            //     extend: 'collection',
+            //     className: 'exportButton',
+            //     text: 'Data Export',
+            //     buttons: [
+            //         { 
+            //             extend:'copy',
+            //             exportOptions: 
+            //             {
+            //                 modifier: {
+            //                 page: 'all',
+            //                 search: 'none'   
+            //                 }
+            //             },
+            //                 //the remaining buttons here 
+            //         },
+            //         { 
+            //             extend:'pdf',
+            //             exportOptions: 
+            //             {
+            //                 modifier: {
+            //                 page: 'all',
+            //                 search: 'none'   
+            //                 }
+            //             },
+            //                 //the remaining buttons here 
+            //         }
+            //     ]
+            // }]
+
+
+
+
 
         });
         /**
@@ -157,7 +282,8 @@
     
             body.unhighlight();
             body.highlight( table.search() );  
-        } );
+        });
+        
         
         
         /**

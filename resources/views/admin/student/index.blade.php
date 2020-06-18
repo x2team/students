@@ -7,17 +7,24 @@
     <link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css"> --}}
 
 
-    <!-- DataTables -->
+    <!-- DataTables Full -->
     {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"> --}}
 
-    <!-- Datatables FULL -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/dt-1.10.21/r-2.2.5/datatables.min.css"/>
+    <!-- Datatables Individual Release Files -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/>
     <!-- Datatables Select -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"/>
     <!-- Datatables Search Highlight -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/plug-ins/1.10.21/features/searchHighlight/dataTables.searchHighlight.css"/>
-
+    <!-- Datatables Responsive -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"/>
+    
+    <!-- Datatables Buttons -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.bootstrap4.min.css"/>
+    <!-- Datatables ColReorder -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/colreorder/1.5.2/css/colReorder.bootstrap4.min.css"/>
+    
 
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
@@ -71,6 +78,10 @@
                                 
                                 <a href="{{ route('admin.student.create') }}" class="btn btn-success">
                                     <i class="fa fa-plus"></i> {{__('Add New')}}</a>
+
+                                <button class="btn btn-outline-dark" id="controlPanel">
+                                    ABC
+                                </button>
                             </div>
                         </div>
                         <div class="card-body">

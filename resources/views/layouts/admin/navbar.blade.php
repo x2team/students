@@ -22,31 +22,33 @@
             @if(app()->isLocale('en'))
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 class="nav-link dropdown-toggle">
-                    <img src="{{ asset('admin/icon/us.svg') }}" title="English" width="16" alt="English">
+                    <img src="{{ asset('admin/icon/us.png') }}" title="English" width="16" alt="English">
                     <span class="d-none d-sm-inline">English</span>
                 </a>
             @else
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                 class="nav-link dropdown-toggle">
-                    <img src="{{ asset('admin/icon/vn.svg') }}" title="English" width="16" alt="English">
+                    <img src="{{ asset('admin/icon/vn.png') }}" title="English" width="16" alt="English">
                     <span class="d-none d-sm-inline">Tiếng Việt</span>
                 </a>
             @endif
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">        
                 <li>
                     <a class="dropdown-item" href="{{ route('admin.locale', ['locale' => 'en']) }}">
-                        <img src="{{ asset('admin/icon/us.svg') }}" title="English" width="16" alt="English">
+                        <img src="{{ asset('admin/icon/us.png') }}" title="English" width="16" alt="English">
                         <span>English</span>
                     </a>
                 </li>
                 <li>
                     <a class="dropdown-item" href="{{ route('admin.locale', ['locale' => 'vi']) }}">
-                        <img src="{{ asset('admin/icon/vn.svg') }}" title="Tiếng Việt" width="16" alt="Tiếng Việt">
+                        <img src="{{ asset('admin/icon/vn.png') }}" title="Tiếng Việt" width="16" alt="Tiếng Việt">
                         <span>Tiếng Việt</span>
                     </a>
                 </li>
             </ul>
         </li>
+
+        
 
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
