@@ -31,12 +31,14 @@ Route::middleware('verified')->group(function() {
             Route::get('/home', 'HomeController@index')->name('admin.home');
             
 
+            Route::GET('student/exportExcel', 'StudentController@exportExcel')->name('admin.student.exportExcel');
+            Route::POST('student/importExcel', 'StudentController@importExcel')->name('admin.student.importExcel');
             Route::get('/student/fetchdata','StudentController@fetchdata')->name('admin.student.fetchdata');
             Route::DELETE('/student/destroyMulti', 'StudentController@destroyMulti')->name('admin.student.destroyMulti');
             Route::resource('student', 'StudentController', ['as' => 'admin'])->except('update');
             Route::POST('student/{student}', 'StudentController@update')->name('admin.student.update');
             
-            Route::POST('student/importExcel', 'StudentController@importExcel')->name('admin.student.importExcel');
+            
 
 
             Route::get('locale/{locale}','LangController@changeLocale')->name('admin.locale');

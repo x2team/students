@@ -97,17 +97,21 @@
                                         </div>
                                     </div> --}}
                                     
-                                    <div class="input-group">
+                                    <div class="form-group">
                                         <div class="custom-file">
-                                          <input type="file" class="custom-file-input" id="excel_file">
-                                          <label class="custom-file-label" for="excel_file">Chọn .xls .xlsx</label>
+                                            <input name="excel_file" type="file" 
+                                                    class="custom-file-input @error('excel_file') is-invalid @enderror"
+                                                    id="excel_file">
+                                            @error('excel_file')
+                                                <span class="invalid-feedback">{!! $errors->first('excel_file') !!}</span>
+                                            @enderror
+                                            <label class="custom-file-label" for="excel_file">Chọn .xls .xlsx</label>
                                         </div>
+                                        <hr>
                                         <div class="input-group-append">
-                                          
-                                          <button type="submit" class="btn btn-sm btn-success"><i class="far fa-file-excel"></i> Upload Data</button>
-                                          
-                                        </div>
-                                      </div>
+                                            <button type="submit" class="btn btn-success"><i class="far fa-file-excel"></i> Upload Data</button>
+                                        </div>                                        
+                                    </div>
                                     
                                 </form>
                             </div>

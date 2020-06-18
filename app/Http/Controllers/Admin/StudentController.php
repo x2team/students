@@ -12,7 +12,8 @@ use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\StudentsExport;
 
 class StudentController extends Controller
 {
@@ -83,7 +84,7 @@ class StudentController extends Controller
      */
     public function store(Admin\StudentStoreRequest $request)
     {
-        dd($request->all());
+
         $data = $this->handleRequest($request);
 
         Student::create($data);
@@ -164,6 +165,7 @@ class StudentController extends Controller
             'birthday' => ['required'],
             'point' => ['required'],
         ]);
+
         
    
         // return redirect()->route('admin.student.index')->with('message-success', 'Your student was updated successfully!');
@@ -232,12 +234,28 @@ class StudentController extends Controller
 
     public function importExcel(Request $request)
     {
-        dd($request->all());
-        $this->validate($request, [
+
+        $validator = Validator::make($request->all(), [
             'excel_file' => 'required|mimes:xls,xlsx'
-        ]);
+
+        ])->validate();
 
 
+        $path = $request->file('excel_file')->getRealPath();
+        
+        $data = Excel::import($path);
+        dd($data);
+
+
+        
+
+
+
+        return redirect()->back()->with(['message-success' => 'Upload data successlly']);        
+    }
+    public function exportExcel() 
+    {
+        return Excel::download(new StudentsExport, 'students.xlsx');
     }
 
 }
