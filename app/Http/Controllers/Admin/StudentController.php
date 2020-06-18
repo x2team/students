@@ -230,4 +230,11 @@ class StudentController extends Controller
         // return redirect()->route('admin.student.index')->with(['message-success' => 'Student was deleted successfully']);
     }
 
+    public function importExcel(Request $request)
+    {
+        $this->validate($request, [
+            'excel_file' => 'required|mimes:xls,xlsx'
+        ]);
+    }
+
 }

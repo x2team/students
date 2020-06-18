@@ -36,7 +36,7 @@ Route::middleware('verified')->group(function() {
             Route::resource('student', 'StudentController', ['as' => 'admin'])->except('update');
             Route::POST('student/{student}', 'StudentController@update')->name('admin.student.update');
             
-
+            Route::POST('student/importExcel', 'StudentController@importExcel')->name('admin.student.importExcel');
 
 
             Route::get('locale/{locale}','LangController@changeLocale')->name('admin.locale');
