@@ -36,6 +36,17 @@ class Student extends Model
         if ($showTimes) $format = $format . " H:i:s";
         return $this->updated_at->format($format);
     }
+    public function fileName()
+    {
+        if(!isset($this->file_id)){
+            return null;
+        }
+        else{
+            return '<span class="badge bg-teal">'.$this->file->name.'</span>';
+            // return ($this->file->name);
+        }
+        
+    }
 
     /**
      *  Accessor

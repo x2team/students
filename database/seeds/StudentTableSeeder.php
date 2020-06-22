@@ -23,7 +23,7 @@ class StudentTableSeeder extends Seeder
         $arr = array('nam', 'nu', 'khac');
         
 
-        for ($i = 1; $i <= 36; $i++)
+        for ($i = 1; $i <= 100000; $i++)
         {
             $students[] = [
                 'file_id'    => NULL,

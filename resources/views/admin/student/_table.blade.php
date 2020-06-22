@@ -6,14 +6,16 @@
 
     <thead>
         <tr>
+            
             <th>STT</th>
-            {{-- <th><input name="checkedAll" type="checkbox" id="checkedAll"></th> --}}
+            <th><input name="checkedAll" type="checkbox" id="checkedAll"></th>
             <th>Name</th>
             <th>Gender</th>
             <th>Image</th>
             <th>Point</th>
             <th>Birthday</th>
             <th>Updated</th>
+            <th>FileName</th>
             <th>Action</th>
         </tr>
     </thead>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Student;
+use App\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Session;
 
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
+use App\Imports\StudentsImport;
+
 
 class StudentController extends Controller
 {
@@ -33,10 +36,13 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        // $students = Student::latestFirst()->get();
+        // $student = Student::find(85);
+        // dd($student->fileName());
+
+
         if($request->ajax()){
-            $students = Student::select(['id','name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
-            // dd($students);
+            $students = Student::select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
+
             return DataTables::of($students)
                         ->editColumn('updated_at', function ($student) {
                             return '<abbr title="'. $student->dateUpdated(true) . '">' . $student->dateUpdated() . '</abbr>';
@@ -48,7 +54,13 @@ class StudentController extends Controller
 
                             return $btnEdit." ".$btnDestroy;
                         })
-                        ->rawColumns(['updated_at', 'action'])
+                        ->addColumn('checkall', function($student){
+                            return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
+                        })
+                        ->addColumn('filename', function($student){
+                            return $student->fileName();
+                        })
+                        ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
                         ->make(true);
         }
         
@@ -89,7 +101,7 @@ class StudentController extends Controller
 
         Student::create($data);
 
-        return redirect()->route('admin.student.index')->with(['message-success' => 'New Student created successlly']);
+        return redirect()->route('admin.student.index')->with(['message-success' => 'New Student created successfully']);
     }
 
     private function handleRequest($request)
@@ -240,18 +252,44 @@ class StudentController extends Controller
 
         ])->validate();
 
+        $data = $this->handleFile($request);
 
-        $path = $request->file('excel_file')->getRealPath();
-        
-        $data = Excel::import($path);
-        dd($data);
+        $file = File::create([
+            'name' => $data['excelName'],
+            'path' => $data['excelPath']
+        ]);
 
-
-        
-
+        Excel::import(new StudentsImport, request()->file('excel_file'));
 
 
         return redirect()->back()->with(['message-success' => 'Upload data successlly']);        
+    }
+    private function handleFile($request)
+    {   
+        $data = $request->all();
+        
+        if($request->hasFile('excel_file')){
+           
+            $excelFile = $request->file('excel_file');
+            $fileName = $excelFile->getClientOriginalName();
+            $extension = $excelFile->getClientOriginalExtension();
+           
+            // $fileName = Str::slug(str_replace(".{$extension}", "", $fileName));
+            // $fileName = $fileName . "_" . uniqid() . ".{$extension}";
+            
+            // insert watermark
+            // $watermark = Image::make($this->watermarkPath."/watermark.png");
+            // $interventionImage = Image::make($image);
+            // $interventionImage->insert($watermark, 'bottom-right', 5, 5)->save();//->save($destination . "/" . $fileName);
+            
+            $directory = date("Y") . '/' . date("m");
+            $data['excelPath'] = $excelFile->storeAs('excel/' . $directory, $fileName ,'public', 0775, true);
+            $data['excelName'] = str_replace('.xlsx', '', $fileName);
+
+        }
+
+        
+        return $data;
     }
     public function exportExcel() 
     {

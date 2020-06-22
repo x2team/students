@@ -65,8 +65,8 @@ class StudentsExport implements FromCollection, WithColumnFormatting, WithMappin
             'Name',
             'Gender',
             'Image',
-            'Point',
             'Birthday',
+            'Point',
             'Created_at',
             'Updated_at',
         ];

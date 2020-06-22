@@ -129,7 +129,8 @@
         //         "processing": true,
         //         "deferLoading": 34,
         // });
-
+        
+        
         var table = $('#student').DataTable({
             processing: true,
             serverSide: true,
@@ -137,7 +138,8 @@
                 url: "{{ route('admin.student.index') }}",
             },
             columns: [
-                {data: 'id', orderable: false, className: "text-center"},
+                {data: 'id', orderable: false, searchable: false, className: "text-center", target: 0 },
+                {data: 'checkall', orderable: false, className: "text-center"},
                 {data: 'name'},
                 {data: 'gender', className: "text-center"},
                 {
@@ -149,11 +151,13 @@
                 },
                 {data: 'point'},
                 {data: 'birthday'},
+                
                 {data: 'updated_at'},
+                {data: 'filename'},
                 {data: 'action', orderable: false, className: "text-center", searchable: false},
             ],
-
-            "order": [[ 0 , 'DESC']],
+            // fixedColumns: true,
+            "order": [[ 0 , 'ASC']],
             responsive:  {
                 breakpoints: [
                     {name:       'bigdesktop',   width: Infinity},
@@ -166,28 +170,10 @@
                     {name:       'mobilel',      width: 480},
                     {name:       'mobilep',      width: 320}
                 ],
-                // details: {
-                //     display: $.fn.dataTable.Responsive.display.modal( {
-                //         header: function ( row ) {
-                //             var data = row.data();
-                //             return 'Details for '+data[0]+' '+data[1];
-                //         }
-                //     } ),
-                //     renderer: $.fn.dataTable.Responsive.renderer.tableAll()
-                // }
             },
             // responsive: true,
             autoWidth: false,
-            
 
-            // dom: 'BS<"clear">lfrtip',
-            // buttons: [
-            //     'excel', 'pdf', 'print',
-            //     {
-            //         text: 'Green',
-            //         className: 'green'
-            //     }
-            // ],
             lengthMenu: [
                 [ 10, 25, 50, -1 ],
                 [ '10', '25', '50', 'All' ]
@@ -240,42 +226,9 @@
                     }
                 }
             ]
-
-            // buttons: [{
-            //     extend: 'collection',
-            //     className: 'exportButton',
-            //     text: 'Data Export',
-            //     buttons: [
-            //         { 
-            //             extend:'copy',
-            //             exportOptions: 
-            //             {
-            //                 modifier: {
-            //                 page: 'all',
-            //                 search: 'none'   
-            //                 }
-            //             },
-            //                 //the remaining buttons here 
-            //         },
-            //         { 
-            //             extend:'pdf',
-            //             exportOptions: 
-            //             {
-            //                 modifier: {
-            //                 page: 'all',
-            //                 search: 'none'   
-            //                 }
-            //             },
-            //                 //the remaining buttons here 
-            //         }
-            //     ]
-            // }]
-
-
-
-
-
         });
+        var info = table.page.info();
+
         /**
          * Search HighLight
          */
@@ -285,6 +238,14 @@
             body.unhighlight();
             body.highlight( table.search() );  
         });
+        /**
+         * Index Column
+         */
+         table.on( 'order.dt search.dt', function () {
+                table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
         
         
         
