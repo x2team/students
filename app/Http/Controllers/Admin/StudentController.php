@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Student;
 use App\File;
 use Illuminate\Http\Request;
@@ -39,9 +40,12 @@ class StudentController extends Controller
         // $student = Student::find(85);
         // dd($student->fileName());
 
-
+        $students = DB::table('students')->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latest('updated_at')->first();
+        dd($students->file->name);
         if($request->ajax()){
-            $students = Student::select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
+
+            // $students = Student::select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
+            $students = DB::table('students')->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latest('updated_at')->get();
 
             return DataTables::of($students)
                         ->editColumn('updated_at', function ($student) {
@@ -58,7 +62,13 @@ class StudentController extends Controller
                             return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
                         })
                         ->addColumn('filename', function($student){
-                            return $student->fileName();
+                            // return $student->fileName();
+                            if(!isset($student->file_id)){
+                                return null;
+                            }
+                            else{
+                                return '<span class="badge bg-teal">'.$student->file->name.'</span>';
+                            }
                         })
                         ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
                         ->make(true);

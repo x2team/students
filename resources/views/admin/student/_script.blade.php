@@ -138,7 +138,8 @@
                 url: "{{ route('admin.student.index') }}",
             },
             columns: [
-                {data: 'id', orderable: false, searchable: false, className: "text-center", target: 0 },
+                // {data: 'id', orderable: false, searchable: false, className: "text-center", target: 0 },
+                {data: 'id'},
                 {data: 'checkall', orderable: false, className: "text-center"},
                 {data: 'name'},
                 {data: 'gender', className: "text-center"},
