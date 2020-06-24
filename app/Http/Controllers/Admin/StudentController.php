@@ -37,19 +37,15 @@ class StudentController extends Controller
      */
     public function index(Request $request)
     {
-        // $student = Student::find(85);
-        // dd($student->fileName());
-
-        $students = DB::table('students')->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latest('updated_at')->first();
-        dd($students->file->name);
         if($request->ajax()){
 
-            // $students = Student::select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
-            $students = DB::table('students')->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latest('updated_at')->get();
+            $students = Student::select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])->latestFirst()->get();
+            // $students = DB::table('students')->leftJoin('files', 'students.file_id', '=', 'files.id')->select('students.id', 'file_id', 'students.name','gender', 'image', 'birthday', 'point', 'students.updated_at', 'files.name as fileName')->latest('updated_at')->get();
+            // $students = Datatables::of(Student::query())->make(true);
 
             return DataTables::of($students)
                         ->editColumn('updated_at', function ($student) {
-                            return '<abbr title="'. $student->dateUpdated(true) . '">' . $student->dateUpdated() . '</abbr>';
+                            return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
                         })
                         ->addColumn('action', function ($student) {
                             $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
@@ -62,12 +58,11 @@ class StudentController extends Controller
                             return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
                         })
                         ->addColumn('filename', function($student){
-                            // return $student->fileName();
                             if(!isset($student->file_id)){
                                 return null;
                             }
                             else{
-                                return '<span class="badge bg-teal">'.$student->file->name.'</span>';
+                                return '<span class="badge bg-teal">'.$student->fileName().'</span>';
                             }
                         })
                         ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
