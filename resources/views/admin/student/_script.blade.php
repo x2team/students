@@ -130,7 +130,9 @@
         //         "deferLoading": 34,
         // });
         
-        
+        /**
+         * Full Options
+         */
         var table = $('#student').DataTable({
             processing: true,
             serverSide: true,
@@ -152,12 +154,16 @@
                 },
                 {data: 'point'},
                 {data: 'birthday'},
-                
                 {data: 'updated_at'},
                 {data: 'filename'},
                 {data: 'action', orderable: false, className: "text-center", searchable: false},
             ],
-            // fixedColumns: true,
+
+            // columns: [
+            //     {data: 'name'},
+            //     {data: 'gender', className: "text-center"},
+            // ],
+
             "order": [[ 0 , 'ASC']],
             responsive:  {
                 breakpoints: [
@@ -174,73 +180,75 @@
             },
             // responsive: true,
             autoWidth: false,
-
             lengthMenu: [
                 [ 10, 25, 50, -1 ],
                 [ '10', '25', '50', 'All' ]
             ],
 
-            dom: 'Blfrtip',
-            buttons: [
-                {
-                    extend: "copyHtml5",
-                    className: "btn-sm btn-outline-success",
-                    titleAttr: 'Copy all',
-                    text: 'copy',
-                    init: function(api, node, config) {
-                        $(node).removeClass('btn-default btn-secondary');
-                    },
+            /**
+             * Buttons: Copy, Excel, PDF, Print
+             */
+            // dom: 'Blfrtip',
+            // buttons: [
+            //     {
+            //         extend: "copyHtml5",
+            //         className: "btn-sm btn-outline-success",
+            //         titleAttr: 'Copy all',
+            //         text: 'copy',
+            //         init: function(api, node, config) {
+            //             $(node).removeClass('btn-default btn-secondary');
+            //         },
                     
-                },
-                {
-                    extend: "excel",
-                    className: "btn-sm btn-outline-success",
-                    titleAttr: 'Export in Excel',
-                    text: '<i class="fas fa-file-excel"></i>Excel',
-                    title: 'DataExcel',
-                    init: function(api, node, config) {
-                        $(node).removeClass('btn-default btn-secondary');
-                    },
-                    exportOptions: {
-                        modifier: {
-                            search: 'applied',
-                            order: 'applied'
-                        }
-                    }
-                },
-                {
-                    extend: "pdfHtml5",
-                    className: "btn-sm btn-outline-success",
-                    titleAttr: 'Pdf Html5',
-                    text: 'PDF',
-                    init: function(api, node, config) {
-                        $(node).removeClass('btn-default btn-secondary');
-                    }
-                },
-                {
-                    extend: "print",
-                    className: "btn-sm btn-outline-success",
-                    titleAttr: 'Print',
-                    text: '<i class="fas fa-print"></i>Print',
-                    init: function(api, node, config) {
-                        $(node).removeClass('btn-default btn-secondary');
-                    }
-                }
-            ]
+            //     },
+            //     {
+            //         extend: "excel",
+            //         className: "btn-sm btn-outline-success",
+            //         titleAttr: 'Export in Excel',
+            //         text: '<i class="fas fa-file-excel"></i>Excel',
+            //         title: 'DataExcel',
+            //         init: function(api, node, config) {
+            //             $(node).removeClass('btn-default btn-secondary');
+            //         },
+            //         exportOptions: {
+            //             modifier: {
+            //                 search: 'applied',
+            //                 order: 'applied'
+            //             }
+            //         }
+            //     },
+            //     {
+            //         extend: "pdfHtml5",
+            //         className: "btn-sm btn-outline-success",
+            //         titleAttr: 'Pdf Html5',
+            //         text: 'PDF',
+            //         init: function(api, node, config) {
+            //             $(node).removeClass('btn-default btn-secondary');
+            //         }
+            //     },
+            //     {
+            //         extend: "print",
+            //         className: "btn-sm btn-outline-success",
+            //         titleAttr: 'Print',
+            //         text: '<i class="fas fa-print"></i>Print',
+            //         init: function(api, node, config) {
+            //             $(node).removeClass('btn-default btn-secondary');
+            //         }
+            //     }
+            // ]
         });
-        var info = table.page.info();
+
 
         /**
          * Search HighLight
          */
-        table.on( 'draw', function () {
+        table.on('draw', function () {
             var body = $( table.table().body() );
     
             body.unhighlight();
             body.highlight( table.search() );  
         });
         /**
-         * Index Column
+         * Index Column : 1, 2, 3, ...
          */
          table.on( 'order.dt search.dt', function () {
                 table.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
@@ -332,7 +340,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            
             // var form_data = $(this).serialize();
             var id = $('#id').val();
 
@@ -372,8 +379,6 @@
             });
         });
         function printErrorMsg (msg) {
-            // $(".alert-danger").find("ul").html('');
-            // $(".alert-danger").css('display','block');
             $.each( msg, function( key, value ) {                
                 $("#"+key).addClass('is-invalid');                
                 $("#"+key).parent().find('.invalid-feedback').text(value);
@@ -404,7 +409,6 @@
         //     modal.find('.modal-body #point').val(point);
         //     modal.find('.modal-body #studentid').val(id);
         // });
-
 
 
 
@@ -454,7 +458,6 @@
             }else{
                 return false;
             }
-
         });
 
         
