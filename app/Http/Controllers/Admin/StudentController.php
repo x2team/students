@@ -78,71 +78,71 @@ class StudentController extends Controller
              * Custom from: https://shareurcodes.com/blog/laravel%20datatables%20server%20side%20processing
              */
             
-            $columns = array( 
-                0 =>'name', 
-                1 =>'gender',
-            );
-            $totalData = Student::count();
-            $totalFiltered = $totalData;
+            // $columns = array( 
+            //     0 =>'name', 
+            //     1 =>'gender',
+            // );
+            // $totalData = Student::count();
+            // $totalFiltered = $totalData;
     
-            $limit = $request->input('length');
-            $start = $request->input('start');
-            $order = $columns[$request->input('order.0.column')];
-            $dir = $request->input('order.0.dir');
+            // $limit = $request->input('length');
+            // $start = $request->input('start');
+            // $order = $columns[$request->input('order.0.column')];
+            // $dir = $request->input('order.0.dir');
             
-            $search = $request->input('search.value');
-            if(empty($search))
-            {            
-                $students = Student::offset($start)
-                            ->limit($limit)
-                            ->orderBy($order,$dir)
-                            ->get();
-            }
-            else {
-                $search = $request->input('search.value'); 
+            // $search = $request->input('search.value');
+            // if(empty($search))
+            // {            
+            //     $students = Student::offset($start)
+            //                 ->limit($limit)
+            //                 ->orderBy($order,$dir)
+            //                 ->get();
+            // }
+            // else {
+            //     $search = $request->input('search.value'); 
 
-                $students =  Student::where('id','LIKE',"%{$search}%")
-                                ->orWhere('name', 'LIKE',"%{$search}%")
-                                ->orWhere('gender', 'LIKE',"%{$search}%")
-                                ->orWhere('birthday', 'LIKE',"%{$search}%")
-                                ->orWhere('point', 'LIKE',"%{$search}%")
-                                ->offset($start)
-                                ->limit($limit)
-                                ->orderBy($order,$dir)
-                                ->get();
+            //     $students =  Student::where('id','LIKE',"%{$search}%")
+            //                     ->orWhere('name', 'LIKE',"%{$search}%")
+            //                     ->orWhere('gender', 'LIKE',"%{$search}%")
+            //                     ->orWhere('birthday', 'LIKE',"%{$search}%")
+            //                     ->orWhere('point', 'LIKE',"%{$search}%")
+            //                     ->offset($start)
+            //                     ->limit($limit)
+            //                     ->orderBy($order,$dir)
+            //                     ->get();
 
-                $totalFiltered = Student::where('id','LIKE',"%{$search}%")
-                                ->orWhere('name', 'LIKE',"%{$search}%")
-                                ->orWhere('gender', 'LIKE',"%{$search}%")
-                                ->orWhere('birthday', 'LIKE',"%{$search}%")
-                                ->orWhere('point', 'LIKE',"%{$search}%")
-                                ->count();
-            }
-            $data = array();
-            if(!empty($students))
-            {
-                foreach ($students as $student)
-                {
-                    // $show =  route('posts.show',$post->id);
-                    // $edit =  route('posts.edit',$post->id);
+            //     $totalFiltered = Student::where('id','LIKE',"%{$search}%")
+            //                     ->orWhere('name', 'LIKE',"%{$search}%")
+            //                     ->orWhere('gender', 'LIKE',"%{$search}%")
+            //                     ->orWhere('birthday', 'LIKE',"%{$search}%")
+            //                     ->orWhere('point', 'LIKE',"%{$search}%")
+            //                     ->count();
+            // }
+            // $data = array();
+            // if(!empty($students))
+            // {
+            //     foreach ($students as $student)
+            //     {
+            //         // $show =  route('posts.show',$post->id);
+            //         // $edit =  route('posts.edit',$post->id);
 
-                    // $nestedData['id'] = $post->id;
-                    $nestedData['name'] = $student->name;
-                    $nestedData['gender'] = $student->gender;
-                    // $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
-                    // $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
-                    //                         &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
-                    $data[] = $nestedData;
+            //         // $nestedData['id'] = $post->id;
+            //         $nestedData['name'] = $student->name;
+            //         $nestedData['gender'] = $student->gender;
+            //         // $nestedData['created_at'] = date('j M Y h:i a',strtotime($post->created_at));
+            //         // $nestedData['options'] = "&emsp;<a href='{$show}' title='SHOW' ><span class='glyphicon glyphicon-list'></span></a>
+            //         //                         &emsp;<a href='{$edit}' title='EDIT' ><span class='glyphicon glyphicon-edit'></span></a>";
+            //         $data[] = $nestedData;
 
-                }
-            }
-            $json_data = array(
-                "draw"            => intval($request->input('draw')),  
-                "recordsTotal"    => intval($totalData),  
-                "recordsFiltered" => intval($totalFiltered), 
-                "data"            => $data   
-                );
-            return json_encode($json_data);
+            //     }
+            // }
+            // $json_data = array(
+            //     "draw"            => intval($request->input('draw')),  
+            //     "recordsTotal"    => intval($totalData),  
+            //     "recordsFiltered" => intval($totalFiltered), 
+            //     "data"            => $data   
+            //     );
+            // return json_encode($json_data);
 
             
             
@@ -153,53 +153,52 @@ class StudentController extends Controller
              * Custom from : https://yajrabox.com/docs/laravel-datatables/master
              */
             // global $count;
-            // $students = Student::query();
-            // $data = DataTables::of($students)
-            //             ->filter(function ($query) {
-            //                 if (empty(request()->input('search.value'))) {
-            //                     $query->offset(request('start'))
-            //                         ->limit(request('length'))
-            //                         ->get();
+            dd(request()->all());
+            $students = Student::query();
+            $data = DataTables::of($students)
+                        ->filter(function ($query) {
+                            if (empty(request()->input('search.value'))) {
+                                $query->offset(request('start'))
+                                    ->limit(request('length'))
+                                    ->get();
 
-            //                     $count = $query->count();
-            //                 }
-            //                 else{
-            //                     $query->where('name', 'LIKE', "%" . request('search.value') . "%")
-            //                         ->orWhere('gender', 'LIKE', "%" . request('search.value') . "%")
-            //                         ->offset(request('start'))
-            //                         ->limit(request('length'))
-            //                         ->get();
-            //                         $count = $query->count();
-            //                 }
-            //             })
-                        
-            //             ->setFilteredRecords($count)
+                                $count = $query->count();
+                            }
+                            else{
+                                $query->where('name', 'LIKE', "%" . request('search.value') . "%")
+                                    ->orWhere('gender', 'LIKE', "%" . request('search.value') . "%")
+                                    ->offset(request('start'))
+                                    ->limit(request('length'))
+                                    ->get();
+                                    $count = $query->count();
+                            }
+                        })
+                        // ->setFilteredRecords($count)
+                        ->editColumn('updated_at', function ($student) {
+                            return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
+                        })
+                        ->addColumn('action', function ($student) {
+                            $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
 
-            //             ->editColumn('updated_at', function ($student) {
-            //                 return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
-            //             })
-            //             ->addColumn('action', function ($student) {
-            //                 $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
+                            $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
 
-            //                 $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
-
-            //                 return $btnEdit." ".$btnDestroy;
-            //             })
-            //             ->addColumn('checkall', function($student){
-            //                 return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
-            //             })
-            //             ->addColumn('filename', function($student){
-            //                 if(!isset($student->file_id)){
-            //                     return null;
-            //                 }
-            //                 else{
-            //                     return '<span class="badge bg-teal">'.$student->fileName().'</span>';
-            //                 }
-            //             })
-            //             ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
-            //             // ->make(true);
-            //             ->toJson();
-            //         return ( $data);
+                            return $btnEdit." ".$btnDestroy;
+                        })
+                        ->addColumn('checkall', function($student){
+                            return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
+                        })
+                        ->addColumn('filename', function($student){
+                            if(!isset($student->file_id)){
+                                return null;
+                            }
+                            else{
+                                return '<span class="badge bg-teal">'.$student->fileName().'</span>';
+                            }
+                        })
+                        ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
+                        // ->make(true);
+                        ->toJson();
+                    return ( $data);
 
         }        
         

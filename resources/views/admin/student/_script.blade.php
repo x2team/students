@@ -159,6 +159,7 @@
                 {data: 'action', orderable: false, className: "text-center", searchable: false},
             ],
 
+
             // columns: [
             //     {data: 'name'},
             //     {data: 'gender', className: "text-center"},
