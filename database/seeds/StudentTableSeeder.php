@@ -24,7 +24,7 @@ class StudentTableSeeder extends Seeder
         
 
         $count = 0;
-        for ($i = 0; $i <= 1000000; $i++)
+        for ($i = 0; $i <= 1000; $i++)
         {
 
             if($count == 100){
