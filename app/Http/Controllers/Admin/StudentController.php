@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
-// use DataTables;
+use Illuminate\Support\Facades\Cache;
 
 
 class StudentController extends Controller
@@ -144,62 +144,94 @@ class StudentController extends Controller
             //     );
             // return json_encode($json_data);
 
-            
-            
+            // Cache::flush();
+            // $student = Cache::remember('bee', 600, function() {
+            //     return Student::select('id', 'name', 'gender')
+            //                     ->where('id', 1);
+            // });
+
+            // $value = Cache::get('bee');
+            // dd($value);
             
                 
             
             /**
              * Custom from : https://yajrabox.com/docs/laravel-datatables/master
              */
-            // global $count;
-            dd(request()->all());
-            $students = Student::query();
-            $data = DataTables::of($students)
-                        ->filter(function ($query) {
-                            if (empty(request()->input('search.value'))) {
-                                $query->offset(request('start'))
-                                    ->limit(request('length'))
-                                    ->get();
+            $key = '';
+            if (empty(request()->input('search.value'))) {
+                
+                $students = Student::with('file')
+                                    ->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])
+                                    ->latestFirst();
 
-                                $count = $query->count();
-                            }
-                            else{
-                                $query->where('name', 'LIKE', "%" . request('search.value') . "%")
-                                    ->orWhere('gender', 'LIKE', "%" . request('search.value') . "%")
-                                    ->offset(request('start'))
-                                    ->limit(request('length'))
-                                    ->get();
-                                    $count = $query->count();
-                            }
-                        })
-                        // ->setFilteredRecords($count)
-                        ->editColumn('updated_at', function ($student) {
-                            return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
-                        })
-                        ->addColumn('action', function ($student) {
-                            $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
+                // return Cache::remember('students', 600, function() use ($students){
+                    return DataTables::of($students)
+                                ->editColumn('updated_at', function ($student) {
+                                    return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
+                                })
+                                ->addColumn('action', function ($student) {
+                                    $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
+    
+                                    $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
+    
+                                    return $btnEdit." ".$btnDestroy;
+                                })
+                                ->addColumn('checkall', function($student){
+                                    return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
+                                })
+                                ->addColumn('filename', function($student){
+                                    if(!isset($student->file_id)){
+                                        return null;
+                                    }
+                                    else{
+                                        return '<span class="badge bg-teal">'.$student->fileName().'</span>';
+                                    }
+                                })
+                                ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
+                                // ->make(true);
+                                ->toJson();
+                // });
+                
+            }
+            else{
 
-                            $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
+                $students = Student::with('file')
+                                    ->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])
+                                    ->where('name', 'LIKE', "%" . request('search.value') . "%")
+                                    ->latestFirst();
 
-                            return $btnEdit." ".$btnDestroy;
-                        })
-                        ->addColumn('checkall', function($student){
-                            return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
-                        })
-                        ->addColumn('filename', function($student){
-                            if(!isset($student->file_id)){
-                                return null;
-                            }
-                            else{
-                                return '<span class="badge bg-teal">'.$student->fileName().'</span>';
-                            }
-                        })
-                        ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
-                        // ->make(true);
-                        ->toJson();
-                    return ( $data);
+                // return Cache::remember(request('search.value'), 600, function() use ($students){
+                    return DataTables::of($students)
+                            ->editColumn('updated_at', function ($student) {
+                                return '<abbr title="'. $student->updated_at . '">' . $student->updated_at . '</abbr>';
+                            })
+                            ->addColumn('action', function ($student) {
+                                $btnDestroy = '<button class="btn-delete btn btn-danger btn-sm" data-remove="' . route('admin.student.destroy', $student->id) . '"> <i class="fas fa-trash-alt"></i></button>';
+    
+                                $btnEdit = '<a href="javascript:;" id="'.$student->id.'" class="btn-edit btn btn-sm btn-primary edit" data-edit><i class="fa fa-edit"></i></a>';
+    
+                                return $btnEdit." ".$btnDestroy;
+                            })
+                            ->addColumn('checkall', function($student){
+                                return '<td><input class="checkbox" type="checkbox" value="'.$student->id.'" name="options[]"></td>';
+                            })
+                            ->addColumn('filename', function($student){
+                                if(!isset($student->file_id)){
+                                    return null;
+                                }
+                                else{
+                                    return '<span class="badge bg-teal">'.$student->fileName().'</span>';
+                                }
+                            })
+                            ->rawColumns(['updated_at', 'action', 'checkall', 'filename'])
+                            ->toJson();
+                // });
 
+            }
+
+
+            
         }        
         
         

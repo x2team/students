@@ -141,31 +141,31 @@
             },
             columns: [
                 // {data: 'id', orderable: false, searchable: false, className: "text-center", target: 0 },
-                {data: 'id'},
+                {data: 'id', searchable: false, orderable: false, className: "text-center"},
                 {data: 'checkall', orderable: false, className: "text-center"},
                 {data: 'name'},
-                {data: 'gender', className: "text-center"},
+                {data: 'gender', className: "text-center", searchable: false},
                 {
                     data: 'image',
                     name: 'image',
                     render: function(data, type, full, meta){
                         return '<img src={!! asset("storage/'+data+'") !!} width="50" style="height:50px !important" class="img-thumbnail" />';
-                    }
+                    },
+                    searchable: false
                 },
-                {data: 'point'},
-                {data: 'birthday'},
-                {data: 'updated_at'},
-                {data: 'filename'},
+                {data: 'point', searchable: false},
+                {data: 'birthday', searchable: false},
+                {data: 'updated_at', searchable: false},
+                {data: 'filename', searchable: false},
                 {data: 'action', orderable: false, className: "text-center", searchable: false},
             ],
-
 
             // columns: [
             //     {data: 'name'},
             //     {data: 'gender', className: "text-center"},
             // ],
 
-            "order": [[ 0 , 'ASC']],
+            "order": [[ 1 , 'DESC']],
             responsive:  {
                 breakpoints: [
                     {name:       'bigdesktop',   width: Infinity},

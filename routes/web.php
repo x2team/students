@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,11 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
+Route::group(['prefix' => 'auth'], function() {
+    
+});
 
+Auth::routes();
 
 
 Route::middleware('verified')->group(function() {
@@ -30,6 +34,11 @@ Route::middleware('verified')->group(function() {
             // Route::get('/', 'HomeController@index')->name('home');
             Route::get('/home', 'HomeController@index')->name('admin.home');
             
+            http://students.test/admin/student
+            Route::GET('student/flush', function(){
+                Cache::flush();
+                echo "flush() cache thanh cong";
+            });
 
             Route::GET('student/exportExcel', 'StudentController@exportExcel')->name('admin.student.exportExcel');
             Route::POST('student/importExcel', 'StudentController@importExcel')->name('admin.student.importExcel');
