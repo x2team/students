@@ -73,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- jQuery -->
     {{-- <script src="https://adminlte.io/themes/v3/plugins/jquery/jquery.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> --}}
+
     
     <!-- Bootstrap 4 -->
     <script src="https://adminlte.io/themes/v3/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

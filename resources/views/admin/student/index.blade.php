@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"> --}}
 
     <!-- Datatables Individual Release Files -->
+    
+    {{-- <link rel="stylesheet" type="text/css" href="https://datatables.net/media/css/site-examples.css?_=0db1cd38700c0cfcdc140c39a2ebc306"/> --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"/> --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"/>
     <!-- Datatables Select -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"/>
