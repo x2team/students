@@ -162,8 +162,8 @@ class StudentController extends Controller
             if (empty(request()->input('search.value'))) {
                 
                 $students = Student::with('file')
-                                    ->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])
-                                    ->latestFirst();
+                                    ->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at']);
+                                    // ->latestFirst();
 
                 // return Cache::remember('students', 600, function() use ($students){
                     return DataTables::of($students)
@@ -198,8 +198,8 @@ class StudentController extends Controller
 
                 $students = Student::with('file')
                                     ->select(['id', 'file_id', 'name','gender', 'image', 'birthday', 'point', 'updated_at'])
-                                    ->where('name', 'LIKE', "%" . request('search.value') . "%")
-                                    ->latestFirst();
+                                    ->where('name', 'LIKE', "%" . request('search.value') . "%");
+                                    // ->latestFirst();
 
                 // return Cache::remember(request('search.value'), 600, function() use ($students){
                     return DataTables::of($students)

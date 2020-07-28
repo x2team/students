@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token', //default: token, dang hoc jwt
+            'driver' => 'token', //default: token, dang hoc: jwt
             'provider' => 'users',
             'hash' => false,
         ],
