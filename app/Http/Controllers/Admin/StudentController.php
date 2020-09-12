@@ -258,7 +258,7 @@ class StudentController extends Controller
     {
         $data = Schema::getColumnListing('students');
 
-        dd($data);
+        // dd($data);
 
         return view('admin.student.create', compact('student'));
     }

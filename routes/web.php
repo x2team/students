@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 
+use App\Helpers\ExternalApiHelper;
+use App\Helpers\Logger;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +20,21 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('/foo', function(){
+
+//     return Logger::log('Broekn');
+
+//     dd( app(Logger::class)->send('ab') );
+
+//     dd( ExternalApiHelper::setFoo('Init setfoo')->foo() );
+
+//     dd( app(ExternalApiHelper::class)->foo() );
+
+//     $apiHelper = new ExternalApiHelper('abc');
+
+//     return $apiHelper->foo();
+// });
 
 
 
