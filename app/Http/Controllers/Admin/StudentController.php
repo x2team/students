@@ -18,6 +18,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Schema;
 
 
 class StudentController extends Controller
@@ -255,6 +256,10 @@ class StudentController extends Controller
      */
     public function create(Student $student)
     {
+        $data = Schema::getColumnListing('students');
+
+        dd($data);
+
         return view('admin.student.create', compact('student'));
     }
 

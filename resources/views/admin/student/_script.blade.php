@@ -345,10 +345,10 @@
             var id = $('#id').val();
 
             var formData = new FormData(document.getElementById('edit-modal'));
-
+            
             // var formData = new FormData();
             // formData.set('image', $('input[type=file]')[0].files[0], 'abc.jpg');
-     
+            
             var url = "{{ route('admin.student.update', ':id') }}";
             url = url.replace(':id', id);
 
